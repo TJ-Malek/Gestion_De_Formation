@@ -2,9 +2,14 @@ package persistence;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity(name="Formateur")
 public class Formateur {
+	@OneToOne(optional = false)
+	@JoinColumn(name = "id", referencedColumnName = "id")
+	private Utilisateur utilisateur;
 	@Id
 	Long id;
 	int telephone;
