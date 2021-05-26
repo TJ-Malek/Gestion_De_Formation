@@ -13,6 +13,7 @@ public class Cursus {
 	String image;
 	int volume_horaire;
 	Boolean etat;
+	String date_ajout;
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +55,12 @@ public class Cursus {
 	}
 	public void setEtat(Boolean etat) {
 		this.etat = etat;
+	}
+	public String getDate_ajout() {
+		return date_ajout;
+	}
+	public void setDate_ajout(String date_ajout) {
+		this.date_ajout = date_ajout;
 	}
 	
 	
