@@ -29,7 +29,19 @@ public class FormateurService {
 			return repoUtilisateur.findUtilisateurByEmail(user.getEmail());
 			
 		}
+		// recupere etat formateur
 		
+			public Boolean getEtatFormateur(Formateur formateur) {
+				return repo.getEtat(formateur.getId()).getEtat();
+			}
+		
+		// change etat formateur
+		
+			public Formateur setEtatFormateur(Formateur formateur) {
+				Boolean etat = getEtatFormateur(formateur);
+				return repo.setEtat(!etat,formateur.getId());
+			}
+			
 		// liste de tous les formateurs
 		public List<Formateur> listAll() {
 			 List<Formateur> listFormateur= new ArrayList<>();
