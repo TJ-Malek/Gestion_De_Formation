@@ -21,9 +21,9 @@ public class FormateurService {
 	
 		public Utilisateur findFormateur(Formateur formateur) {
 			Utilisateur user = new Utilisateur();
-			user.setEmail(formateur.getEmail());
-			//user.setMdp(formateur.getMdp());
-			serviceUser.findUtilisateur(null);
+			user.setEmail(formateur.getEmail());//session
+			
+			serviceUser.findUtilisateur(user);
 			
 			return repoUtilisateur.findUtilisateurByEmail(user.getEmail());
 			
