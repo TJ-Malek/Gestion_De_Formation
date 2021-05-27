@@ -18,14 +18,16 @@ public class UtilisateurService {
 	private  UtilisateurRepository repo;
 	
 	// Verifie si l'utilisateur existe dans la BD
-	public Optional<Utilisateur> findUtilisateur(Utilisateur utilisateur) {
-		ExampleMatcher UtilisateurMatcher = ExampleMatcher.matchingAny()
+	
+	public Utilisateur findUtilisateur(Utilisateur utilisateur) {
+		/*ExampleMatcher UtilisateurMatcher = ExampleMatcher.matchingAny()
 	                //.withIgnoreCase("nom", "prenom")
 	                .withIgnorePaths("id","nom","prenom","role")
 	                .withNullHandler(ExampleMatcher.NullHandler.INCLUDE)
-	                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+	                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);*/
 		
-		return repo.findOne(Example.of(utilisateur,UtilisateurMatcher));
+		return repo.findUtilisateur(utilisateur.getEmail(),utilisateur.getMdp());
+		
 	}
 	
 	// liste de tous les utilisateurs
@@ -35,12 +37,12 @@ public class UtilisateurService {
 	
 	// enregistre l'utilisateur s'il n'existe pas dans la BD
 	public Boolean save(Utilisateur utilisateur) {
-		if(!findUtilisateur(utilisateur).isPresent()) {
+		if(findUtilisateur(utilisateur)!=null) {
 				repo.save(utilisateur);
 				return true;
 	}
 		else {
-			return false;
+				return false;
 		}
 	}
 	
