@@ -1,11 +1,14 @@
 package persistence;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="Section")
 public class Section {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	Long id_Chapitre;
 	String designation;

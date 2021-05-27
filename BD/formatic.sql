@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 26 mai 2021 à 18:28
+-- Généré le : jeu. 27 mai 2021 à 16:18
 -- Version du serveur :  10.4.17-MariaDB
--- Version de PHP : 8.0.0
+-- Version de PHP : 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,6 +64,7 @@ CREATE TABLE `cursus` (
   `image` varchar(500) NOT NULL,
   `volume_horaire` int(11) NOT NULL,
   `date_ajout` datetime NOT NULL,
+  `id_Formateur` bigint(20) NOT NULL,
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -148,7 +149,8 @@ ALTER TABLE `cours`
 -- Index pour la table `cursus`
 --
 ALTER TABLE `cursus`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_Formateur` (`id_Formateur`);
 
 --
 -- Index pour la table `cursus_suivis`
@@ -217,7 +219,7 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Contraintes pour les tables déchargées
@@ -234,6 +236,12 @@ ALTER TABLE `chapitre`
 --
 ALTER TABLE `cours`
   ADD CONSTRAINT `fk_idCursus_Cours` FOREIGN KEY (`id_Cursus`) REFERENCES `cursus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `cursus`
+--
+ALTER TABLE `cursus`
+  ADD CONSTRAINT `fk_idFormateur_Cursus` FOREIGN KEY (`id_Formateur`) REFERENCES `formateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `cursus_suivis`

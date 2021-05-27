@@ -1,11 +1,14 @@
 package persistence;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="Cursus_Suivis")
 public class Cursus_Suivis {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	Long id_Utilisateur;
 	Long id_Chapitre;

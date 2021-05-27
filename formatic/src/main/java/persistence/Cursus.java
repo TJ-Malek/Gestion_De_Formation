@@ -1,12 +1,16 @@
 package persistence;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="Cursus")
 public class Cursus {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
+	Long id_Formateur;
 	String designation;
 	String contenu;
 	String pdf;
@@ -61,6 +65,12 @@ public class Cursus {
 	}
 	public void setDate_ajout(String date_ajout) {
 		this.date_ajout = date_ajout;
+	}
+	public Long getId_Formateur() {
+		return id_Formateur;
+	}
+	public void setId_Formateur(Long id_Formateur) {
+		this.id_Formateur = id_Formateur;
 	}
 	
 	
