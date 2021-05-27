@@ -11,16 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class FormateurService {
 	@Autowired
 	private  FormateurRepository repo;
-	// Verifie si l'formateur existe dans la BD
+	@Autowired
+	private  UtilisateurRepository repoUtilisateur;
+	@Autowired
+	private UtilisateurService serviceUser; 
 	
-		public Formateur findFormateur(Formateur formateur) {
-			/*ExampleMatcher FormateurMatcher = ExampleMatcher.matchingAny()
-		                //.withIgnoreCase("nom", "prenom")
-		                .withIgnorePaths("id","nom","prenom","role")
-		                .withNullHandler(ExampleMatcher.NullHandler.INCLUDE)
-		                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);*/
+	
+	// Verifie si le formateur existe dans la BD
+	
+		public Utilisateur findFormateur(Formateur formateur) {
+			Utilisateur user = new Utilisateur();
+			user.setEmail(formateur.getEmail());
+			//user.setMdp(formateur.getMdp());
+			serviceUser.findUtilisateur(null);
 			
-			return repo.findFormateur(formateur.getEmail(),formateur.getMdp());
+			return repoUtilisateur.findUtilisateurByEmail(user.getEmail());
 			
 		}
 		
@@ -29,7 +34,7 @@ public class FormateurService {
 			return repo.findAll();
 		}
 		
-		// enregistre l'formateur s'il n'existe pas dans la BD
+		// enregistre le formateur s'il n'existe pas dans la BD
 		public Boolean save(Formateur formateur) {
 			if(findFormateur(formateur)==null) {
 					repo.save(formateur);

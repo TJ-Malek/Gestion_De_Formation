@@ -17,6 +17,12 @@ public class UtilisateurService {
 	@Autowired
 	private  UtilisateurRepository repo;
 	
+	// authentification
+	
+	public Utilisateur login(Utilisateur utilisateur) {
+		return repo.findUtilisateurByEmailAndMdp(utilisateur.getEmail(),utilisateur.getMdp());	
+	}
+	
 	// Verifie si l'utilisateur existe dans la BD
 	
 	public Utilisateur findUtilisateur(Utilisateur utilisateur) {
@@ -26,7 +32,7 @@ public class UtilisateurService {
 	                .withNullHandler(ExampleMatcher.NullHandler.INCLUDE)
 	                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);*/
 		
-		return repo.findUtilisateur(utilisateur.getEmail(),utilisateur.getMdp());
+		return repo.findUtilisateurByEmail(utilisateur.getEmail());
 		
 	}
 	

@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity(name="Formateur")
-public class Formateur {
+public class Formateur extends Utilisateur{
 	/*@OneToOne(optional = false)
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	private Utilisateur utilisateur;*/
