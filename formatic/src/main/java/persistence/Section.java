@@ -7,6 +7,7 @@ import javax.persistence.Id;
 public class Section {
 	@Id
 	Long id;
+	Long id_Chapitre;
 	String designation;
 	Boolean etat;
 	String image;
@@ -54,6 +55,12 @@ public class Section {
 	}
 	public void setDate_ajout(String date_ajout) {
 		this.date_ajout = date_ajout;
+	}
+	public Long getId_Chapitre() {
+		return id_Chapitre;
+	}
+	public void setId_Chapitre(Long id_Chapitre) {
+		this.id_Chapitre = id_Chapitre;
 	}
     
     

@@ -6,8 +6,8 @@ import javax.persistence.OneToOne;
 
 @Entity(name="Utilisateur")
 public class Utilisateur {
-	@OneToOne(mappedBy = "Utilisateur")
-	private Formateur formateur;
+/*	@OneToOne(mappedBy = "Utilisateur")
+	private Formateur formateur;*/
 @Id
 Long id;
 String nom;

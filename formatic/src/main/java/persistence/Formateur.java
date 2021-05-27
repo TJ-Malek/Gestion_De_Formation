@@ -7,9 +7,9 @@ import javax.persistence.OneToOne;
 
 @Entity(name="Formateur")
 public class Formateur {
-	@OneToOne(optional = false)
+	/*@OneToOne(optional = false)
 	@JoinColumn(name = "id", referencedColumnName = "id")
-	private Utilisateur utilisateur;
+	private Utilisateur utilisateur;*/
 	@Id
 	Long id;
 	int telephone;

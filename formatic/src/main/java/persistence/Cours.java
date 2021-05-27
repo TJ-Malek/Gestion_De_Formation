@@ -7,6 +7,7 @@ import javax.persistence.Id;
 public class Cours {
 	@Id
 	Long id;
+	Long id_Cursus;
 	String designation;
 	String image;
 	String date_ajout;
@@ -40,6 +41,12 @@ public class Cours {
 	}
 	public void setEtat(Boolean etat) {
 		this.etat = etat;
+	}
+	public Long getId_Cursus() {
+		return id_Cursus;
+	}
+	public void setId_Cursus(Long id_Cursus) {
+		this.id_Cursus = id_Cursus;
 	}
 	
 	
