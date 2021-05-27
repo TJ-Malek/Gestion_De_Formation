@@ -1,4 +1,4 @@
-package business_logic;
+package com.example.formatic;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import persistence.Utilisateur;
+//import persistence.Utilisateur;
 
 @Service
 @Transactional
@@ -37,7 +37,7 @@ public class UtilisateurService {
 	
 	// enregistre l'utilisateur s'il n'existe pas dans la BD
 	public Boolean save(Utilisateur utilisateur) {
-		if(findUtilisateur(utilisateur)!=null) {
+		if(findUtilisateur(utilisateur)==null) {
 				repo.save(utilisateur);
 				return true;
 	}

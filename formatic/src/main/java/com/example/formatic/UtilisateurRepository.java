@@ -1,16 +1,15 @@
-package business_logic;
+package com.example.formatic;
 
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import persistence.Utilisateur;
+//import persistence.Utilisateur;
 
 
 public interface  UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
-	@Query(value = "from utilisateur t where email = :email AND mdp =  :mdp")
-	public Utilisateur findUtilisateur(@Param("email")String email,@Param("mdp")String mdp);
+	@Query("select u from Utilisateur u where u.email = ?1 AND u.mdp =  ?2")
+	public Utilisateur findUtilisateur(String email,String mdp);
 
 }

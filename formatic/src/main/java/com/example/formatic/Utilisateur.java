@@ -1,14 +1,16 @@
-package persistence;
+package com.example.formatic;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity(name="Utilisateur")
+@Entity
 public class Utilisateur {
-/*	@OneToOne(mappedBy = "Utilisateur")
-	private Formateur formateur;*/
+
 @Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
 Long id;
 String nom;
 String prenom;
@@ -51,17 +53,6 @@ public String getMdp() {
 public void setMdp(String mdp) {
 	this.mdp = mdp;
 }
-/*public Utilisateur(String nom, String prenom, String role, String email, String mdp) {
 
-	this.nom = nom;
-	this.prenom = prenom;
-	this.role = role;
-	this.email = email;
-	this.mdp = mdp;
-}
-public Utilisateur() {
-
-
-}*/
 
 }
