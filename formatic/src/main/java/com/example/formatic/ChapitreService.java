@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ChapitreService {
 	@Autowired
 	private  ChapitreRepository repo;
-	// Verifie si le chapitre existe dans la BD
+		// Verifie si le chapitre existe dans la BD
 	
 			public Chapitre FindChapitre(Chapitre chapitre) {
 				return repo.FindChapitre(chapitre.getDesignation(),chapitre.getId_Cours());

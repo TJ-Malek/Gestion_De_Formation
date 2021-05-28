@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class SectionService {
 	@Autowired
 	private  SectionRepository repo;
-	// Verifie si le section existe dans la BD
+		// Verifie si le section existe dans la BD
 	
 			public Section FindSection(Section section) {
 				return repo.FindSection(section.getDesignation(),section.getId_Chapitre());

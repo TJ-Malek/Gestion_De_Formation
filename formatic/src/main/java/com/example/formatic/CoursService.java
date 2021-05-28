@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CoursService {
 	@Autowired
 	private  CoursRepository repo;
-	// Verifie si le cours existe dans la BD
+		// Verifie si le cours existe dans la BD
 	
 			public Cours FindCours(Cours cours) {
 				return repo.FindCours(cours.getDesignation(),cours.getId_Cursus());
