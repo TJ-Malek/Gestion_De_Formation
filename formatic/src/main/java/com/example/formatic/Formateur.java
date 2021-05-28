@@ -2,8 +2,8 @@ package com.example.formatic;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.OneToOne;
 
 @Entity(name="Formateur")
 public class Formateur extends Utilisateur{
