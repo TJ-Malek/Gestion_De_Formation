@@ -1,0 +1,11 @@
+package com.example.formatic;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface Cursus_SuivisRepository extends JpaRepository<Cursus_Suivis, Long>  {
+	@Query("select * from Cursus_Suivis cs where cs.id_Utilisateur = ?1 and cs.id_Cursus= ?2")
+	public Cursus_Suivis FindCursus_Suivis(Long id_Utilisateur,Long iid_Cursus);
+	@Query("select * from Cursus_Suivis cs where cs.id_Utilisateur = ?1")
+	public Cursus_Suivis AllCursus_Suivis(Long id_Utilisateur);
+}
