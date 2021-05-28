@@ -29,10 +29,11 @@ public class CoursService {
 			return repo.setEtat(!etat,cours.getId());
 		}
 		
-		// liste de tous les courss
+		// liste de tous les cours
 		public List<Cours> listAll() {
 			 return repo.findAll();
 		}
+		
 		
 		// enregistre le cours s'il n'existe pas dans la BD
 		public Boolean save(Cours cours) {

@@ -23,6 +23,11 @@ public class CursusService {
 		public Cursus FindCursus(Cursus cursus) {
 			return repo.FindCursus(cursus.getDesignation(),cursus.getId_Formateur());
 		}
+	// tous les cursus d'un formateur
+	
+	public Cursus AllCursusFormateur(Cursus cursus) {
+		return repo.AllCursusFormateur(cursus.getId_Formateur());
+	}
 	// recupere etat cursus
 	
 		public Boolean getEtatCursus(Cursus cursus) {
