@@ -1,4 +1,4 @@
-package persistence;
+package com.example.formatic;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
