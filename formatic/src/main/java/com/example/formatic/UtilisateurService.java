@@ -19,20 +19,21 @@ public class UtilisateurService {
 	
 	// authentification
 	
-	public Utilisateur login(Utilisateur utilisateur) {
+	public Utilisateur findUtilisateurByEmailAndMdp(Utilisateur utilisateur) {
 		return repo.findUtilisateurByEmailAndMdp(utilisateur.getEmail(),utilisateur.getMdp());	
 	}
 	
 	// Verifie si l'utilisateur existe dans la BD
 	
-	public Utilisateur findUtilisateur(Utilisateur utilisateur) {
+	public Utilisateur findUtilisateurByEmail(Utilisateur utilisateur) {
 		/*ExampleMatcher UtilisateurMatcher = ExampleMatcher.matchingAny()
 	                //.withIgnoreCase("nom", "prenom")
 	                .withIgnorePaths("id","nom","prenom","role")
 	                .withNullHandler(ExampleMatcher.NullHandler.INCLUDE)
 	                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);*/
-		
-		return repo.findUtilisateurByEmail(utilisateur.getEmail());
+		Utilisateur u = repo.findUtilisateur(utilisateur.getEmail());
+		System.out.println("email returned in find by  email = "+utilisateur.getEmail());
+		return u;
 		
 	}
 	
@@ -43,7 +44,9 @@ public class UtilisateurService {
 	
 	// enregistre l'utilisateur s'il n'existe pas dans la BD
 	public Boolean save(Utilisateur utilisateur) {
-		if(findUtilisateur(utilisateur)==null) {
+		System.out.println("email right here = "+utilisateur.getEmail());
+		if(findUtilisateurByEmail(utilisateur)==null) {
+			System.out.println("email here = "+utilisateur.getEmail());
 				repo.save(utilisateur);
 				return true;
 	}

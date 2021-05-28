@@ -20,9 +20,15 @@ public class AppController {
 	utilisateur.setNom("aNom");
 	utilisateur.setPrenom("aPrenom");
 	utilisateur.setRole("etudiant");
+	//utilisateur.setId((long) 1);
 	
 	Boolean t = serviceUser.save(utilisateur);
 	System.out.println("saved = "+t);
 	return "index";
 	}
+	@RequestMapping("/profil")
+	public String viewProfilPage() {
+		return "profil";
+	}
+	
 }

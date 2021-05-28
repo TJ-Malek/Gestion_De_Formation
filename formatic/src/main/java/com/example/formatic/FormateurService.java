@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class FormateurService {
 	@Autowired
 	private  FormateurRepository repo;
-	@Autowired
-	private  UtilisateurRepository repoUtilisateur;
+	/*@Autowired
+	private  UtilisateurRepository repoUtilisateur;*/
 	@Autowired
 	private UtilisateurService serviceUser; 
 	
@@ -22,11 +22,9 @@ public class FormateurService {
 	
 		public Utilisateur findFormateur(Formateur formateur) {
 			Utilisateur user = new Utilisateur();
-			user.setEmail(formateur.getEmail());//session
-			
-			serviceUser.findUtilisateur(user);
-			
-			return repoUtilisateur.findUtilisateurByEmail(user.getEmail());
+			user.setId(formateur.getId());
+			Utilisateur u = serviceUser.get(user);
+			return serviceUser.findUtilisateurByEmail(u);
 			
 		}
 	// recupere etat formateur
@@ -42,13 +40,14 @@ public class FormateurService {
 		return repo.setEtat(!etat,formateur.getId());
 	}
 	
-	// liste de tous les formateurs
+	// liste de tous les formateurs(sans infos utilisateur)
 	public List<Formateur> listAll() {
-		 List<Formateur> listFormateur= new ArrayList<>();
+		/* List<Formateur> listFormateur= new ArrayList<>();
 		 for (Formateur l : repo.findAll()) {
 			 listFormateur.add(get(l));
 	      }
-		 return listFormateur;
+		 return listFormateur;*/
+		return  repo.findAll();
 	}
 	
 	// enregistre le formateur s'il n'existe pas dans la BD
@@ -62,20 +61,20 @@ public class FormateurService {
 		}
 	}
 	
-	// modification formateur
+	// modification formateur(sans infos utilisateur)
 	public void update(Formateur formateur) {
-		Utilisateur user = new Utilisateur();
+	/*	Utilisateur user = new Utilisateur();
 		user.setId(formateur.getId());
 		user.setEmail(formateur.getEmail());
 		user.setMdp(formateur.getMdp());
 		user.setNom(formateur.getNom());
 		user.setPrenom(formateur.getPrenom());
 		user.setRole(formateur.getRole());
-		serviceUser.update(user);
+		serviceUser.update(user);*/
 		repo.save(formateur);
 	}
 	
-	// recupere formateur par son id 
+	// recupere formateur par son id (sans infos utilisateur)
 	public Formateur get(Formateur formateur) {
 		Utilisateur user = new Utilisateur();
 		user.setId(formateur.getId());
@@ -83,11 +82,11 @@ public class FormateurService {
 		Utilisateur u = serviceUser.get(user);
 		
 		Formateur f = repo.findById(formateur.getId()).get();
-		f.setEmail(u.getEmail());
+		/*f.setEmail(u.getEmail());
 		f.setMdp(u.getMdp());
 		f.setNom(u.getNom());
 		f.setPrenom(u.getPrenom());
-		f.setRole(u.getRole());
+		f.setRole(u.getRole());*/
 		return f;
 	}
 	
