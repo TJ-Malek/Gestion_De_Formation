@@ -33,7 +33,7 @@ public class ChapitreService {
 		public List<Chapitre> listAll() {
 			 return repo.findAll();
 		}
-		// tous les chapitre d'un cursus
+		// tous les chapitres d'un cours
 		
 		public Chapitre AllChapitreCursus(Chapitre chapitre) {
 			return repo.AllChapitreCours(chapitre.getId_Cours());

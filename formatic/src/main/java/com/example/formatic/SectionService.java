@@ -33,7 +33,7 @@ public class SectionService {
 		public List<Section> listAll() {
 			 return repo.findAll();
 		}
-		// tous les section d'un cursus
+		// toutes les sections d'un chapitre
 		
 		public Section AllSectionCursus(Section section) {
 			return repo.AllSectionChapitre(section.getId_Chapitre());
