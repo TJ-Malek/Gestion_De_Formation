@@ -33,7 +33,11 @@ public class CoursService {
 		public List<Cours> listAll() {
 			 return repo.findAll();
 		}
+		// tous les cours d'un cursus
 		
+		public Cours AllCoursCursus(Cours cours) {
+			return repo.AllCoursCursus(cours.getId_Cursus());
+		}
 		
 		// enregistre le cours s'il n'existe pas dans la BD
 		public Boolean save(Cours cours) {
