@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 //import persistence.Utilisateur;
 
 
@@ -53,5 +54,18 @@ public class AppController {
 		else {
 			return "redirect:/";
 		}
+	}
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+	public String saveUser(@ModelAttribute("user") Utilisateur user) {
+		Utilisateur u = new Utilisateur();
+		u.setId(user.getId());
+		Utilisateur u2= serviceUser.get(u);
+		u2.setEmail(user.getEmail());
+		u2.setNom(user.getNom());
+		u2.setPrenom(user.getPrenom());
+		u2.setMdp(user.getMdp());
+		serviceUser.update(u2);
+		
+		return "redirect:/profil/"+user.getId();
 	}
 }
