@@ -23,24 +23,15 @@ public class AppController {
 	private UtilisateurService serviceUser; 
 	@RequestMapping("/")
 	public String viewHomePage() {
-	Utilisateur utilisateur = new Utilisateur();
-	utilisateur.setEmail("a@a.com");
-	utilisateur.setMdp("123");
-	utilisateur.setNom("aNom");
-	utilisateur.setPrenom("aPrenom");
-	utilisateur.setRole("etudiant");
-	//utilisateur.setId((long) 1);
-	
-	Boolean t = serviceUser.save(utilisateur);
-	System.out.println("saved = "+t);
 	return "index";
 	}
-	
+	@RequestMapping("/deconnexion")
+	public String deconnexion() {
+	return "index";
+	}
 	@RequestMapping("/inscription")
 	public String inscription() {
-		
-		
-		
+
 		return "inscription";
 	}
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
@@ -83,5 +74,11 @@ public class AppController {
 		serviceUser.update(u2);
 		
 		return "redirect:/profil/"+user.getId();
+	}
+	
+	@RequestMapping("/demandeFormateur")
+	public String demandeFormateur() {
+
+		return "demandeFormateur";
 	}
 }
