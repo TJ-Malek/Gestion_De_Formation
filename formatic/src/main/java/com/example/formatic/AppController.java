@@ -65,9 +65,12 @@ public class AppController {
 	public String auth(@ModelAttribute("user") Utilisateur user) {
 		Utilisateur find = serviceUser.findUtilisateurByEmailAndMdp(user);
 		if(find!=null) {
-			
+			if(find.getRole().equals("etudiant")) {
 		return "redirect:/profil/"+find.getId();
+	} else {
+		return "/admin";
 	}
+		}
 		else {
 			return "redirect:/";
 		}
@@ -91,11 +94,12 @@ public class AppController {
 
 		return "demandeFormateur";
 	}
-	@RequestMapping(value = "/saveFormateur", method = RequestMethod.POST)
-	public String saveFormateur(@ModelAttribute("formateur") Formateur formateur) {
+	@RequestMapping(value = "/saveFormateur/{id}", method = RequestMethod.POST)
+	public String saveFormateur(@ModelAttribute("formateur") Formateur formateur,@PathVariable(name = "id") Long id) {
 		formateur.setEtat(false);
-		serviceFormateur.save(formateur);
-		
+		formateur.setId(id);
+		Boolean test = serviceFormateur.save(formateur);
+		System.out.println("formateur = "+test);
 		return "redirect:/profil/"+formateur.getId();
 	}
 }

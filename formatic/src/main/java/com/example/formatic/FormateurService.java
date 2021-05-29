@@ -20,11 +20,11 @@ public class FormateurService {
 	
 	// Verifie si le formateur existe dans la BD
 	
-		public Utilisateur findFormateur(Formateur formateur) {
-			Utilisateur user = new Utilisateur();
+		public Formateur findFormateur(Formateur formateur) {
+			/*Utilisateur user = new Utilisateur();
 			user.setId(formateur.getId());
-			Utilisateur u = serviceUser.get(user);
-			return serviceUser.findUtilisateurByEmail(u);
+			Utilisateur u = serviceUser.get(user);*/
+			return repo.findFormateur(formateur.getTelephone());
 			
 		}
 	// recupere etat formateur
