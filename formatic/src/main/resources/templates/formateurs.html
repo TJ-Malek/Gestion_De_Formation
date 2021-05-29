@@ -38,36 +38,36 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Email</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Role</th>
+                <th>Téléphone</th>
+                <th>Parcours</th>
+                <th>Etat</th>
+               
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="user : ${listUsers}">
-            	<td th:text="${user.id}">ID</td>
-            	<td th:text="${user.email}">Email</td>
-                <td th:text="${user.nom}">Nom</td>
-                <td th:text="${user.prenom}">Prenom</td>
-  				<td th:text="${user.role}">Role</td>
+            <tr th:each="formateur : ${listFormateurs}">
+            	<td th:text="${formateur.id}">ID</td>
+            	<td th:text="${formateur.telephone}">Téléphone</td>
+                <td th:text="${formateur.parcours}">Parcours</td>
+                <td th:text="${formateur.etat}">Etat</td>
+  				
                 <td>
-                <!--  	<a th:href="@{'/editUser/' + ${user.id}}" class="link-success">Modifier</a>
+                <!--  	<a th:href="@{'/editFormateur/' + ${formateur.id}}" class="link-success">Modifier</a>
                 	&nbsp;&nbsp;&nbsp;-->
                 	
                 	<!-- Button trigger modal -->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${user.id}">
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${formateur.id}">
    Supprimer
 </button>
 
 <!-- Modal -->
-<div class="modal fade" th:id="'SupprimerModel'+${user.id}" tabindex="-1" th:attr="aria-labelledby='SupprimerModel'+${user.id}" aria-hidden="true">
+<div class="modal fade" th:id="'SupprimerModel'+${formateur.id}" tabindex="-1" th:attr="aria-labelledby='SupprimerModel'+${formateur.id}" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" th:id="'SupprimerModel'+${user.id}"><span style="color:#0D6EFD;">Confirmation</span></h5>
+        <h5 class="modal-title" th:id="'SupprimerModel'+${formateur.id}"><span style="color:#0D6EFD;">Confirmation</span></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -75,7 +75,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-         <a type="button" class="btn btn-primary" th:href="@{'/deleteUser/' + ${user.id}}">Oui</a>
+         <a type="button" class="btn btn-primary" th:href="@{'/deleteFormateur/' + ${formateur.id}}">Oui</a>
       </div>
     </div>
   </div>

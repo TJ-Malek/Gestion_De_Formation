@@ -102,5 +102,9 @@ public class FormateurService {
 	// supprime formateur
 	public void delete(Formateur formateur) {
 		repo.deleteById(formateur.getId());
+		Utilisateur user = new Utilisateur();
+		user.setId(formateur.getId());
+		Utilisateur u = serviceUser.get(user);
+		u.setRole("etudiant");
 	}
 }

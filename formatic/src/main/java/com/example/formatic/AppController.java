@@ -119,4 +119,17 @@ public class AppController {
 		serviceUser.delete(user);
 		return "redirect:/admin";		
 	}
+	@RequestMapping("/formateurs")
+	public String viewFormateurs(Model model) {
+		List<Formateur> listformateurs = serviceFormateur.listAll();
+		model.addAttribute("listFormateurs", listformateurs);
+	return "admin";
+	}
+	@RequestMapping("/deleteFormateurs/{id}")
+	public String deleteFormateur(@PathVariable(name = "id") Long id) {
+		Formateur formateur = new Formateur();
+		formateur.setId(id);
+		serviceFormateur.delete(formateur);
+		return "redirect:/formateurs";		
+	}
 }
