@@ -1,7 +1,10 @@
 package com.example.formatic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.ui.Model;
@@ -68,7 +71,7 @@ public class AppController {
 			if(find.getRole().equals("etudiant")) {
 		return "redirect:/profil/"+find.getId();
 	} else {
-		return "/admin";
+		return "redirect:/admin";
 	}
 		}
 		else {
@@ -101,5 +104,19 @@ public class AppController {
 		Boolean test = serviceFormateur.save(formateur);
 		System.out.println("formateur = "+test);
 		return "redirect:/profil/"+formateur.getId();
+	}
+	//admin
+	@RequestMapping("/admin")
+	public String viewAdmin(Model model) {
+		List<Utilisateur> listUsers = serviceUser.listAll();
+		model.addAttribute("listUsers", listUsers);
+	return "admin";
+	}
+	@RequestMapping("/deleteUser/{id}")
+	public String deleteUser(@PathVariable(name = "id") Long id) {
+		Utilisateur user = new Utilisateur();
+		user.setId(id);
+		serviceUser.delete(user);
+		return "redirect:/admin";		
 	}
 }

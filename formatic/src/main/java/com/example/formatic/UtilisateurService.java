@@ -39,7 +39,7 @@ public class UtilisateurService {
 	
 	// liste de tous les utilisateurs
 	public List<Utilisateur> listAll() {
-		return repo.findAll();
+		return repo.listAll();
 	}
 	
 	// enregistre l'utilisateur s'il n'existe pas dans la BD

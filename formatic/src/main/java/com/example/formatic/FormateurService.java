@@ -37,6 +37,15 @@ public class FormateurService {
 	
 	public Formateur setEtatFormateur(Formateur formateur) {
 		Boolean etat = getEtatFormateur(formateur);
+		Utilisateur user = new Utilisateur();
+		user.setId(formateur.getId());
+		Utilisateur u = serviceUser.get(user);
+		if(u.getRole().equals("etudiant")) {
+			u.setRole("formateur");
+		} else {
+			u.setRole("etudiant");
+		}
+		serviceUser.update(u);
 		return repo.setEtat(!etat,formateur.getId());
 	}
 	

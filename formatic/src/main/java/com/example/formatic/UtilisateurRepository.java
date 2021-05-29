@@ -1,6 +1,8 @@
 package com.example.formatic;
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 //import org.springframework.data.repository.query.Param;
@@ -13,4 +15,6 @@ public interface  UtilisateurRepository extends JpaRepository<Utilisateur, Long>
 	public Utilisateur findUtilisateurByEmailAndMdp(String email,String mdp);
 	@Query("select u from Utilisateur u where u.email = ?1")
 	public Utilisateur findUtilisateur(String email);
+	@Query("select u from Utilisateur u where u.role != 'admin'")
+	public List<Utilisateur> listAll();
 }
