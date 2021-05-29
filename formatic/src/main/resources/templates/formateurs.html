@@ -34,6 +34,7 @@
     </div>
   </div>
 </nav>
+ 
 <table class="table align-middle table-dark table-hover table-bordered">
         <thead>
             <tr>
@@ -47,15 +48,22 @@
         </thead>
         <tbody>
             <tr th:each="formateur : ${listFormateurs}">
-            	<td th:text="${formateur.id}">ID</td>
-            	<td th:text="${formateur.telephone}">Téléphone</td>
-                <td th:text="${formateur.parcours}">Parcours</td>
-                <td th:text="${formateur.etat}">Etat</td>
+           <form action="#" th:action="@{/updateFormateur}" 
+			method="post" class="offset-3">
+            	<td> <input type="text" name="id" th:value="${formateur.id}" readonly/></td>
+            	<td> <input type="text"  th:value="${formateur.telephone}" name="telephone" ></input></td>
+                <td> <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="parcours" th:text="${formateur.parcours}" ></textarea></td>
+                
+                <td > <a th:if="${formateur.etat == true}"  type="button" class="btn btn-primary" th:href="@{'/etatFormateur/' + ${formateur.id}}">Actif</a>
+                <a th:if="${formateur.etat == false}"  type="button" class="btn btn-danger" th:href="@{'/etatFormateur/' + ${formateur.id}}">Désactivé</a>
+                </td>
   				
                 <td>
                 <!--  	<a th:href="@{'/editFormateur/' + ${formateur.id}}" class="link-success">Modifier</a>
                 	&nbsp;&nbsp;&nbsp;-->
-                	
+                	<button type="submit" class="btn btn-success">
+   Modifier
+</button>
                 	<!-- Button trigger modal -->
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${formateur.id}">
@@ -82,9 +90,11 @@
 </div>
 
                 </td>
+                 </form>
             </tr>
         </tbody>
     </table>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     
 </body>

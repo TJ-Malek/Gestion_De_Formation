@@ -121,15 +121,30 @@ public class AppController {
 	}
 	@RequestMapping("/formateurs")
 	public String viewFormateurs(Model model) {
-		List<Formateur> listformateurs = serviceFormateur.listAll();
-		model.addAttribute("listFormateurs", listformateurs);
-	return "admin";
+		List<Formateur> listFormateurs= serviceFormateur.listAll();
+		model.addAttribute("listFormateurs", listFormateurs);
+	return "formateurs";
 	}
 	@RequestMapping("/deleteFormateurs/{id}")
 	public String deleteFormateur(@PathVariable(name = "id") Long id) {
 		Formateur formateur = new Formateur();
 		formateur.setId(id);
 		serviceFormateur.delete(formateur);
+		return "redirect:/formateurs";		
+	}
+	@RequestMapping(value = "/updateFormateur", method = RequestMethod.POST)
+	public String updateUser(@ModelAttribute("formateur") Formateur formateur) {
+		Formateur f = serviceFormateur.get(formateur);
+		formateur.setEtat(f.getEtat());
+		serviceFormateur.update(formateur);
+		
+		return "redirect:/formateurs";
+	}
+	@RequestMapping("/etatFormateur/{id}")
+	public String etatFormateur(@PathVariable(name = "id") Long id) {
+		Formateur formateur = new Formateur();
+		formateur.setId(id);
+		serviceFormateur.setEtatFormateur(formateur);
 		return "redirect:/formateurs";		
 	}
 }

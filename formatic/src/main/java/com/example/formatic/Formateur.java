@@ -1,6 +1,8 @@
 package com.example.formatic;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.OneToOne;
@@ -10,6 +12,7 @@ public class Formateur {
 	/*@OneToOne(optional = false)
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	private Utilisateur utilisateur;*/
+
 	@Id
 	Long id;
 	int telephone;
