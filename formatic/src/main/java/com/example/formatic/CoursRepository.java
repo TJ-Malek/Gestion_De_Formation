@@ -10,6 +10,6 @@ public interface CoursRepository extends JpaRepository<Cours, Long>  {
 	public Cours getEtat(Long id);
 	@Query("update Cours c  set c.etat =?1 where c.id = ?2")
 	public Cours setEtat(Boolean etat,Long id);
-	@Query("select c from Cours c where c.id_Cursus = ?1")
+	@Query("select c from Cours c where c.id_Cursus = ?1 order by date_ajout DESC")
 	public Cours AllCoursCursus(Long id_Cursus);
 }

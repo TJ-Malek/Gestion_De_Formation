@@ -10,6 +10,6 @@ public interface ChapitreRepository extends JpaRepository<Chapitre, Long>  {
 	public Chapitre getEtat(Long id);
 	@Query("update Chapitre c  set c.etat =?1 where c.id = ?2")
 	public Chapitre setEtat(Boolean etat,Long id);
-	@Query("select c from Chapitre c where c.id_Cours  = ?1")
+	@Query("select c from Chapitre c where c.id_Cours  = ?1 order by date_ajout DESC")
 	public Chapitre AllChapitreCours(Long id_Cours);
 }
