@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 //import persistence.Utilisateur;
 
 
@@ -33,6 +34,21 @@ public class AppController {
 	Boolean t = serviceUser.save(utilisateur);
 	System.out.println("saved = "+t);
 	return "index";
+	}
+	
+	@RequestMapping("/inscription")
+	public String inscription() {
+		
+		
+		
+		return "inscription";
+	}
+	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+	public String saveUser(@ModelAttribute("user") Utilisateur user) {
+		user.setRole("etudiant");
+		serviceUser.save(user);
+		
+		return "redirect:/";
 	}
 	@RequestMapping("/profil/{id}")
 	public ModelAndView viewProfilPage(@PathVariable(name = "id") Long id) {
@@ -56,7 +72,7 @@ public class AppController {
 		}
 	}
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public String saveUser(@ModelAttribute("user") Utilisateur user) {
+	public String updateUser(@ModelAttribute("user") Utilisateur user) {
 		Utilisateur u = new Utilisateur();
 		u.setId(user.getId());
 		Utilisateur u2= serviceUser.get(u);
