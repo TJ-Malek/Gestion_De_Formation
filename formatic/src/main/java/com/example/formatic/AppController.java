@@ -19,8 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class AppController {
+	
+	//services
+	
 	@Autowired
 	private UtilisateurService serviceUser; 
+	@Autowired
+	private FormateurService serviceFormateur; 
+	
+	//mapping
+	
+	//visiteur
 	@RequestMapping("/")
 	public String viewHomePage() {
 	return "index";
@@ -34,6 +43,7 @@ public class AppController {
 
 		return "inscription";
 	}
+	//utilisateur
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("user") Utilisateur user) {
 		user.setRole("etudiant");
@@ -75,10 +85,17 @@ public class AppController {
 		
 		return "redirect:/profil/"+user.getId();
 	}
-	
-	@RequestMapping("/demandeFormateur")
-	public String demandeFormateur() {
+	//formateur
+	@RequestMapping("/demandeFormateur/{id}")
+	public String demandeFormateur(@PathVariable(name = "id") Long id) {
 
 		return "demandeFormateur";
+	}
+	@RequestMapping(value = "/saveFormateur", method = RequestMethod.POST)
+	public String saveFormateur(@ModelAttribute("formateur") Formateur formateur) {
+		formateur.setEtat(false);
+		serviceFormateur.save(formateur);
+		
+		return "redirect:/profil/"+formateur.getId();
 	}
 }
