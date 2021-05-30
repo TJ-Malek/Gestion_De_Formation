@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 27 mai 2021 à 16:18
+-- Généré le : Dim 30 mai 2021 à 14:14
 -- Version du serveur :  10.4.17-MariaDB
--- Version de PHP : 8.0.2
+-- Version de PHP : 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -95,6 +95,13 @@ CREATE TABLE `formateur` (
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `formateur`
+--
+
+INSERT INTO `formateur` (`id`, `telephone`, `parcours`, `etat`) VALUES
+(8, 69457812, 'développeur ANDROID', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +133,15 @@ CREATE TABLE `utilisateur` (
   `email` varchar(500) NOT NULL,
   `mdp` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `role`, `email`, `mdp`) VALUES
+(6, 'utilisateur1Nom', 'utilisateur1Prenom', 'etudiant', 'utilisateur1@gmail.com', '123456'),
+(8, 'tajine', 'malek', 'etudiant', 'malektajine@gmail.com', '123'),
+(9, 'admin', 'admin', 'admin', 'admin@gmail.com', '123');
 
 --
 -- Index pour les tables déchargées
@@ -166,6 +182,7 @@ ALTER TABLE `cursus_suivis`
 -- Index pour la table `formateur`
 --
 ALTER TABLE `formateur`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id` (`id`);
 
 --
@@ -219,7 +236,7 @@ ALTER TABLE `section`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Contraintes pour les tables déchargées
