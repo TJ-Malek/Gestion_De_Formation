@@ -24,7 +24,7 @@ public class Cursus_SuivisService {
 		}
 		// toutes les cursus_Suiviss d'un etudiant
 		
-		public Cursus_Suivis AllCursus_SuivisCursus(Cursus_Suivis cursus_Suivis) {
+		public List<Cursus_Suivis> AllCursus_SuivisCursus(Cursus_Suivis cursus_Suivis) {
 			return repo.AllCursus_Suivis(cursus_Suivis.getId_Utilisateur());
 		}
 		

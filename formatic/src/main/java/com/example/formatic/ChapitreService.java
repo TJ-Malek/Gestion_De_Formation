@@ -35,7 +35,7 @@ public class ChapitreService {
 		}
 		// tous les chapitres d'un cours
 		
-		public Chapitre AllChapitreCursus(Chapitre chapitre) {
+		public List<Chapitre> AllChapitreCursus(Chapitre chapitre) {
 			return repo.AllChapitreCours(chapitre.getId_Cours());
 		}
 		

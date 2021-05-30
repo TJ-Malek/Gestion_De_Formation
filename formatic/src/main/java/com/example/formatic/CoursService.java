@@ -35,7 +35,7 @@ public class CoursService {
 		}
 		// tous les cours d'un cursus
 		
-		public Cours AllCoursCursus(Cours cours) {
+		public List<Cours> AllCoursCursus(Cours cours) {
 			return repo.AllCoursCursus(cours.getId_Cursus());
 		}
 		
