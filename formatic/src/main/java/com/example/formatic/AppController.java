@@ -125,7 +125,7 @@ public class AppController {
 		model.addAttribute("listFormateurs", listFormateurs);
 	return "formateurs";
 	}
-	@RequestMapping("/deleteFormateurs/{id}")
+	@RequestMapping("/deleteFormateur/{id}")
 	public String deleteFormateur(@PathVariable(name = "id") Long id) {
 		Formateur formateur = new Formateur();
 		formateur.setId(id);
