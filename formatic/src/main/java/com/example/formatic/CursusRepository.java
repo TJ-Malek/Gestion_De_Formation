@@ -1,5 +1,7 @@
 package com.example.formatic;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +15,6 @@ public interface CursusRepository  extends JpaRepository<Cursus, Long>  {
 	@Query("update Cursus c  set c.etat =?1 where c.id = ?2")
 	public void setEtat(Boolean etat,Long id);
 	@Query("select c from Cursus c where c.id_Formateur = ?1 order by date_ajout DESC")
-	public Cursus AllCursusFormateur(Long id_Formateur);
+	public List<Cursus> AllCursusFormateur(Long id_Formateur);
 	
 }

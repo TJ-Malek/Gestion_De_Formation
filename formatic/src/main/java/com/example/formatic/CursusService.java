@@ -25,7 +25,7 @@ public class CursusService {
 		}
 	// tous les cursus d'un formateur
 	
-	public Cursus AllCursusFormateur(Cursus cursus) {
+	public List<Cursus> AllCursusFormateur(Cursus cursus) {
 		return repo.AllCursusFormateur(cursus.getId_Formateur());
 	}
 	// recupere etat cursus
