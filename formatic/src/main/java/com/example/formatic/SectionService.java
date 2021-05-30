@@ -19,14 +19,14 @@ public class SectionService {
 		// recupere etat section
 		
 			public Boolean getEtatSection(Section section) {
-				return repo.getEtat(section.getId()).getEtat();
+				return repo.getEtat(section.getId());
 			}
 		
 		// change etat section
 		
-		public Section setEtatSection(Section section) {
+		public void setEtatSection(Section section) {
 			Boolean etat = getEtatSection(section);
-			return repo.setEtat(!etat,section.getId());
+			repo.setEtat(!etat,section.getId());
 		}
 		
 		// liste de tous les section

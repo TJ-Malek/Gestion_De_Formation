@@ -31,14 +31,14 @@ public class CursusService {
 	// recupere etat cursus
 	
 		public Boolean getEtatCursus(Cursus cursus) {
-			return repo.getEtat(cursus.getId()).getEtat();
+			return repo.getEtat(cursus.getId());
 		}
 	
 	// change etat cursus
 	
-	public Cursus setEtatCursus(Cursus cursus) {
+	public void setEtatCursus(Cursus cursus) {
 		Boolean etat = getEtatCursus(cursus);
-		return repo.setEtat(!etat,cursus.getId());
+		repo.setEtat(!etat,cursus.getId());
 	}
 	
 	// liste de tous les cursuss

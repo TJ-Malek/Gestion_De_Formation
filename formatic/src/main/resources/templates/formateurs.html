@@ -54,7 +54,7 @@
             	<td> <input type="text"  th:value="${formateur.telephone}" name="telephone" ></input></td>
                 <td> <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="parcours" th:text="${formateur.parcours}" ></textarea></td>
                 
-                <td > <a th:if="${formateur.etat == true}"  type="button" class="btn btn-primary" th:href="@{'/etatFormateur/' + ${formateur.id}}">Actif</a>
+                <td > <a th:if="${formateur.etat == true}"  type="button" class="btn btn-success" th:href="@{'/etatFormateur/' + ${formateur.id}}">Actif</a>
                 <a th:if="${formateur.etat == false}"  type="button" class="btn btn-danger" th:href="@{'/etatFormateur/' + ${formateur.id}}">Désactivé</a>
                 </td>
   				

@@ -19,14 +19,14 @@ public class CoursService {
 		// recupere etat cours
 		
 			public Boolean getEtatCours(Cours cours) {
-				return repo.getEtat(cours.getId()).getEtat();
+				return repo.getEtat(cours.getId());
 			}
 		
 		// change etat cours
 		
-		public Cours setEtatCours(Cours cours) {
+		public void setEtatCours(Cours cours) {
 			Boolean etat = getEtatCours(cours);
-			return repo.setEtat(!etat,cours.getId());
+			 repo.setEtat(!etat,cours.getId());
 		}
 		
 		// liste de tous les cours

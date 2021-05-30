@@ -30,13 +30,15 @@ public class FormateurService {
 	// recupere etat formateur
 	
 		public Boolean getEtatFormateur(Formateur formateur) {
-			return repo.getEtat(formateur.getId()).getEtat();
+			return repo.getEtat(formateur.getId());
 		}
 	
 	// change etat formateur
 	
-	public Formateur setEtatFormateur(Formateur formateur) {
+	public void setEtatFormateur(Formateur formateur) {
+		
 		Boolean etat = getEtatFormateur(formateur);
+		System.out.println("etat = "+etat);
 		Utilisateur user = new Utilisateur();
 		user.setId(formateur.getId());
 		Utilisateur u = serviceUser.get(user);
@@ -46,7 +48,8 @@ public class FormateurService {
 			u.setRole("etudiant");
 		}
 		serviceUser.update(u);
-		return repo.setEtat(!etat,formateur.getId());
+		
+		 repo.setEtat(!etat,formateur.getId());
 	}
 	
 	// liste de tous les formateurs(sans infos utilisateur)

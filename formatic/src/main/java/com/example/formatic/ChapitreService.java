@@ -19,14 +19,14 @@ public class ChapitreService {
 		// recupere etat chapitre
 		
 			public Boolean getEtatChapitre(Chapitre chapitre) {
-				return repo.getEtat(chapitre.getId()).getEtat();
+				return repo.getEtat(chapitre.getId());
 			}
 		
 		// change etat chapitre
 		
-		public Chapitre setEtatChapitre(Chapitre chapitre) {
+		public void setEtatChapitre(Chapitre chapitre) {
 			Boolean etat = getEtatChapitre(chapitre);
-			return repo.setEtat(!etat,chapitre.getId());
+		 repo.setEtat(!etat,chapitre.getId());
 		}
 		
 		// liste de tous les chapitre

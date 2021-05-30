@@ -144,6 +144,7 @@ public class AppController {
 	public String etatFormateur(@PathVariable(name = "id") Long id) {
 		Formateur formateur = new Formateur();
 		formateur.setId(id);
+		System.out.println("formateur id etat = "+formateur.getId());
 		serviceFormateur.setEtatFormateur(formateur);
 		return "redirect:/formateurs";		
 	}
