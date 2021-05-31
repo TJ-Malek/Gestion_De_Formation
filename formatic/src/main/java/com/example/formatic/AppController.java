@@ -199,4 +199,11 @@ public class AppController {
 		
 		return "redirect:/CursusDetails/"+cursus.getId();
 	}
+	@RequestMapping("/deleteCursus/{id}")
+	public String deleteCursus(@PathVariable(name = "id") Long id) {
+		Cursus cursus = new Cursus();
+		cursus.setId(id);
+		serviceCursus.delete(cursus);
+		return "redirect:/CursusDetails/"+cursus.getId();
+	}
 }

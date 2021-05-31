@@ -54,13 +54,37 @@
    Ajouter cursus
     <span class="badge bg-primary rounded-pill"><!-- <p th:text=${cursus.volume_horaire}>volume_horaire will be rendered here</p> --></span>
   </a>
-   <div class="list-group"  th:each="cursus : ${listCursusFormateur}">
-  <a type="button"  th:href="@{'/CursusDetails/' + ${cursus.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
+   <div class="list-group col-6"  th:each="cursus : ${listCursusFormateur}">
+  <a type="button" style="display:inline!important;" th:href="@{'/CursusDetails/' + ${cursus.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
    <p th:text=${cursus.designation}>designation will be rendered here</p>
   <span class="badge bg-primary rounded-pill">Date création : <span th:text=${cursus.date_ajout}>volume_horaire will be rendered here</span></span>  <span class="badge bg-primary rounded-pill">Volume Horaire : <span th:text=${cursus.volume_horaire}>volume_horaire will be rendered here</span> H</span>
+
   </a>
+<!-- supprimer -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger col-2" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${cursus.id}">
+   Supprimer
+</button>
 
-
+<!-- Modal -->
+<div class="modal fade" th:id="'SupprimerModel'+${cursus.id}" tabindex="-1" th:attr="aria-labelledby='SupprimerModel'+${cursus.id}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" th:id="'SupprimerModel'+${cursus.id}"><span style="color:#0D6EFD;">Confirmation</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <span style="color:#0D6EFD;">êtes-vous sûr de vouloir supprimer?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+         <a type="button" class="btn btn-primary" th:href="@{'/deleteCursus/' + ${cursus.id}}">Oui</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- supprimer -->
  <p th:if="${listCursusFormateur == null}" style="color:#0D6EFD;">Vous n'avez pas encore ajouté de cursus</p>
  
 </div>
