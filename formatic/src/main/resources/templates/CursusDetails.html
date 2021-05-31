@@ -82,7 +82,8 @@
 					</td>
 				</tr>		
 				<tr>
-					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> </td>
+					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> 
+					<a class="btn btn-primary" type="button" th:href="@{'/coursFormateur/' + ${id} + '/' +  *{id}}">Gestion des cours</a> </td>
 				</tr>
 			</table>
 		</form>

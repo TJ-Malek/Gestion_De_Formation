@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Cours</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+
+</head>
+<body th:object="${user}">
+<nav class="navbar navbar-expand-lg navbar-primary bg-dark" >
+  <div class="container-fluid">
+    <a class="navbar-brand" href="cours">Formatic</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{'/profil/' + ${id}}">Profil</a>
+        </li>
+      
+     
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Cours
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Tous les cours</a></li>
+            <li><a class="dropdown-item" href="#">Mes cours</a></li>
+            
+          </ul>
+        </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Formateur
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" th:href="@{'/demandeFormateur/' + ${id}}">Demande formateur</a></li>
+            <li><a class="dropdown-item" href="#">Mes cours</a></li>
+            
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/deconnexion">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="card mt-4 border-0" >
+  <div class="card-body">
+   <a type="button" th:href="@{'/ajoutCours/' + ${id}}" class="btn btn-primary " aria-current="true">
+   Ajouter cours
+    <span class="badge bg-primary rounded-pill"><!-- <p th:text=${cours.volume_horaire}>volume_horaire will be rendered here</p> --></span>
+  </a>
+   <div class="list-group col-6"  th:each="cours : ${listCoursFormateur}">
+  <a type="button" style="display:inline!important;" th:href="@{'/CoursDetails/' + ${id} + '/' + ${cours.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
+   <p th:text=${cours.designation}>designation will be rendered here</p>
+  <span class="badge bg-primary rounded-pill">Date création : <span th:text=${cours.date_ajout}>volume_horaire will be rendered here</span></span>  <span class="badge bg-primary rounded-pill">Volume Horaire : <span th:text=${cours.volume_horaire}>volume_horaire will be rendered here</span> H</span>
+
+  </a>
+<!-- supprimer -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger col-2" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${cours.id}">
+   Supprimer
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="'SupprimerModel'+${cours.id}" tabindex="-1" th:attr="aria-labelledby='SupprimerModel'+${cours.id}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" th:id="'SupprimerModel'+${cours.id}"><span style="color:#0D6EFD;">Confirmation</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <span style="color:#0D6EFD;">êtes-vous sûr de vouloir supprimer?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+         <a type="button" class="btn btn-primary" th:href="@{'/deleteCours/' + ${id} + '/' + ${cours.id}}">Oui</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- supprimer -->
+ <p th:if="${listCoursFormateur == null}" style="color:#0D6EFD;">Vous n'avez pas encore ajouté de cours</p>
+ 
+</div>
+
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
