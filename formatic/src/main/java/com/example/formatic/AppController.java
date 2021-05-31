@@ -432,4 +432,16 @@ public class AppController {
 			serviceSection.setEtatSection(section);
 			return "redirect:/SectionDetails/"+id+"/"+idCursus+'/'+idCours+"/"+idChapitre+"/"+section.getId();
 		}
+		
+		//etudiant
+		
+		@RequestMapping("/tousCursusActif")
+		public String tousCursusActif(Model model) {
+			/*Cursus cursus = new Cursus();
+			cursus.setId_Formateur(id);*/
+			List<Cursus> listCursusActif = serviceCursus.AllCursusActif();
+			model.addAttribute("listCursusActif", listCursusActif);
+			
+			return "tousCursusActif";		
+		}
 }
