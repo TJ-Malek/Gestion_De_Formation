@@ -55,7 +55,7 @@
     <span class="badge bg-primary rounded-pill"><!-- <p th:text=${cursus.volume_horaire}>volume_horaire will be rendered here</p> --></span>
   </a>
    <div class="list-group col-6"  th:each="cursus : ${listCursusFormateur}">
-  <a type="button" style="display:inline!important;" th:href="@{'/CursusDetails/' + ${cursus.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
+  <a type="button" style="display:inline!important;" th:href="@{'/CursusDetails/' + ${id} + '/' + ${cursus.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
    <p th:text=${cursus.designation}>designation will be rendered here</p>
   <span class="badge bg-primary rounded-pill">Date création : <span th:text=${cursus.date_ajout}>volume_horaire will be rendered here</span></span>  <span class="badge bg-primary rounded-pill">Volume Horaire : <span th:text=${cursus.volume_horaire}>volume_horaire will be rendered here</span> H</span>
 
@@ -79,7 +79,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-         <a type="button" class="btn btn-primary" th:href="@{'/deleteCursus/' + ${cursus.id}}">Oui</a>
+         <a type="button" class="btn btn-primary" th:href="@{'/deleteCursus/' + ${id} + '/' + ${cursus.id}}">Oui</a>
       </div>
     </div>
   </div>

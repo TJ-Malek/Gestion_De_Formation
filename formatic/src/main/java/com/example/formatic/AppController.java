@@ -180,10 +180,10 @@ public class AppController {
 		
 		return "redirect:/cursusFormateur/"+cursus.getId_Formateur();
 	}
-	@RequestMapping("/CursusDetails/{id}")
-	public String detailsCursus(@PathVariable(name = "id") Long id,Model model) {
+	@RequestMapping("/CursusDetails/{id}/{idCursus}")
+	public String detailsCursus(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,Model model) {
 		Cursus cu = new Cursus();
-		cu.setId(id);
+		cu.setId(idCursus);
 		Cursus cursus = serviceCursus.get(cu);
 		model.addAttribute("cursus", cursus);
 		
@@ -197,13 +197,13 @@ public class AppController {
 		cursus.setId_Formateur(c.getId_Formateur());
 		serviceCursus.update(cursus);
 		
-		return "redirect:/CursusDetails/"+cursus.getId();
+		return "redirect:/CursusDetails/"+cursus.getId_Formateur()+"/"+cursus.getId();
 	}
-	@RequestMapping("/deleteCursus/{id}")
-	public String deleteCursus(@PathVariable(name = "id") Long id) {
+	@RequestMapping("/deleteCursus/{id}/{idCursus}")
+	public String deleteCursus(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus) {
 		Cursus cursus = new Cursus();
-		cursus.setId(id);
+		cursus.setId(idCursus);
 		serviceCursus.delete(cursus);
-		return "redirect:/CursusDetails/"+cursus.getId();
+		return "redirect:/CursusDetails/"+id+"/"+cursus.getId();
 	}
 }
