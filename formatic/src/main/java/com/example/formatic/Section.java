@@ -14,7 +14,7 @@ public class Section {
 	String designation;
 	Boolean etat;
 	String image;
-	String titre;
+
 	String contenu;
     String date_ajout;
 	public Long getId() {
@@ -41,12 +41,7 @@ public class Section {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getTitre() {
-		return titre;
-	}
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
+	
 	public String getContenu() {
 		return contenu;
 	}

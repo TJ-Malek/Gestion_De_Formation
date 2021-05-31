@@ -3,14 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
-<title>Profil</title>
+<title>Section</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
 
 </head>
-<body th:object="${user}">
+<body>
 <nav class="navbar navbar-expand-lg navbar-primary bg-dark" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="cursus">Formatic</a>
+    <a class="navbar-brand" href="section">Formatic</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -50,34 +50,24 @@
 </nav>
 <div class="card mt-4 border-0">
   <div class="card-body">
-   <form action="#" th:action="@{/updateUser}" 
+   <form action="#" th:action="@{'/saveSection/'+ ${id} + '/'+ ${idCursus}+'/' + ${idCours}+'/'+${idChapitre}}"
 			method="post" class="offset-3">
-	<input type="hidden" th:field="*{id}" />
+	
 			<table border="0" cellpadding="10">
 					
 				<tr>				
-					<td>Nom:</td>
+					<td>Designation:</td>
 					<td>
-						<input type="text" th:field="*{nom}" />
+						<input type="text" name="designation" />
 					</td>
 				</tr>
-				<tr>
-					<td>Prénom:</td>
-					<td><input type="text" th:field="*{prenom}" /></td>
-				</tr>
-			
-					<tr>
-					<td>Email:</td>
-					<td><input type="email" th:field="*{email}" /></td>
-				</tr>	
+			<tr>
+					<td>Contenu:</td>
+					<td>
 					
-			
-					<tr>
-					<td>Mot de passe :</td>
-					<td><input type="password" name="mdp" id="mdp" /></td>
-				</tr>	
-							
-				<tr>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="contenu"></textarea>
+					</td>
+				</tr>
 					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> </td>
 				</tr>
 			</table>

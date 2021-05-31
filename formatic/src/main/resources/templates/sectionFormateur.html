@@ -3,14 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
-<title>Profil</title>
+<title>Section</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
 
 </head>
 <body th:object="${user}">
 <nav class="navbar navbar-expand-lg navbar-primary bg-dark" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="cursus">Formatic</a>
+    <a class="navbar-brand" href="section">Formatic</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,40 +48,47 @@
     </div>
   </div>
 </nav>
-<div class="card mt-4 border-0">
+<div class="card mt-4 border-0" >
   <div class="card-body">
-   <form action="#" th:action="@{/updateUser}" 
-			method="post" class="offset-3">
-	<input type="hidden" th:field="*{id}" />
-			<table border="0" cellpadding="10">
-					
-				<tr>				
-					<td>Nom:</td>
-					<td>
-						<input type="text" th:field="*{nom}" />
-					</td>
-				</tr>
-				<tr>
-					<td>Prénom:</td>
-					<td><input type="text" th:field="*{prenom}" /></td>
-				</tr>
-			
-					<tr>
-					<td>Email:</td>
-					<td><input type="email" th:field="*{email}" /></td>
-				</tr>	
-					
-			
-					<tr>
-					<td>Mot de passe :</td>
-					<td><input type="password" name="mdp" id="mdp" /></td>
-				</tr>	
-							
-				<tr>
-					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> </td>
-				</tr>
-			</table>
-		</form>
+   <a type="button" th:href="@{'/ajoutSection/' + ${id} + '/' + ${idCursus} +'/'+ ${idCours}+'/'+${idChapitre}}" class="btn btn-primary " aria-current="true">
+   Ajouter section
+    <span class="badge bg-primary rounded-pill"><!-- <p th:text=${section.volume_horaire}>volume_horaire will be rendered here</p> --></span>
+  </a>
+   <div class="list-group col-6"  th:each="section : ${listSectionFormateur}">
+  <a type="button" style="display:inline!important;" th:href="@{'/SectionDetails/' + ${id}+'/'+ ${idCursus} +'/'+${idCours}+'/'+${idChapitre}+ '/' + ${section.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
+   <p th:text=${section.designation}>designation will be rendered here</p>
+  <span class="badge bg-primary rounded-pill">Date création : <span th:text=${section.date_ajout}>date will be rendered here</span></span>  
+
+  </a>
+<!-- supprimer -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger col-2" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${section.id}">
+   Supprimer
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="'SupprimerModel'+${section.id}" tabindex="-1" th:attr="aria-labelledby='SupprimerModel'+${section.id}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" th:id="'SupprimerModel'+${section.id}"><span style="color:#0D6EFD;">Confirmation</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <span style="color:#0D6EFD;">êtes-vous sûr de vouloir supprimer?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+         <a type="button" class="btn btn-primary" th:href="@{'/deleteSection/' + ${id}+'/'+ ${idCursus}+'/'+${idCours}+'/'+${idChapitre} + '/' + ${section.id}}">Oui</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- supprimer -->
+ <p th:if="${listSectionFormateur == null}" style="color:#0D6EFD;">Vous n'avez pas encore ajouté de section</p>
+ 
+</div>
+
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
