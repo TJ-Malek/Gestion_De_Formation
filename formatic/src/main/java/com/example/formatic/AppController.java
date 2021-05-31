@@ -1,5 +1,7 @@
 package com.example.formatic;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,8 @@ public class AppController {
 	private UtilisateurService serviceUser; 
 	@Autowired
 	private FormateurService serviceFormateur; 
-	
+	@Autowired
+	private CursusService serviceCursus; 
 	//mapping
 	
 	//visiteur
@@ -147,5 +150,34 @@ public class AppController {
 		System.out.println("formateur id etat = "+formateur.getId());
 		serviceFormateur.setEtatFormateur(formateur);
 		return "redirect:/formateurs";		
+	}
+	@RequestMapping("/cursusFormateur/{id}")
+	public String cursusFormateur(@PathVariable(name = "id") Long id,Model model) {
+		Cursus cursus = new Cursus();
+		cursus.setId_Formateur(id);
+		List<Cursus> listCursusFormateur= serviceCursus.AllCursusFormateur(cursus);
+		model.addAttribute("listCursusFormateur", listCursusFormateur);
+		
+		return "cursusFormateur";		
+	}
+	@RequestMapping("/ajoutCursus/{id}")
+	public String ajoutCursus(@PathVariable(name = "id") Long id) {
+		/*Cursus cursus = new Cursus();
+		cursus.setId_Formateur(id);*/
+		
+		
+		return "ajoutCursus";		
+	}
+	@RequestMapping(value = "/saveCursus/{id}", method = RequestMethod.POST)
+	public String saveCursus(@ModelAttribute("cursus") Cursus cursus,@PathVariable(name = "id") Long id) {
+		cursus.setEtat(false);
+		cursus.setId_Formateur(id);
+		Date date = new Date(); 
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		System.out.println(formatter.format(date));
+		cursus.setDate_ajout(formatter.format(date));
+		Boolean test = serviceCursus.save(cursus);
+		
+		return "redirect:/cursusFormateur/"+cursus.getId_Formateur();
 	}
 }

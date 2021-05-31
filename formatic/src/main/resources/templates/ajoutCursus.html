@@ -50,29 +50,34 @@
 </nav>
 <div class="card mt-4 border-0">
   <div class="card-body">
-   <form action="#" th:action="@{'/saveFormateur/'+ ${id}}"
+   <form action="#" th:action="@{'/saveCursus/'+ ${id}}"
 			method="post" class="offset-3">
 	
 			<table border="0" cellpadding="10">
 					
 				<tr>				
-					<td>Téléphone:</td>
+					<td>Designation:</td>
 					<td>
-						<input type="text" name="telephone" />
+						<input type="text" name="designation" />
 					</td>
 				</tr>
 				<tr>
-					<td>Parcours:</td>
+					<td>Contenu:</td>
 					<td>
 					
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="parcours"></textarea>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="contenu"></textarea>
 					</td>
 				</tr>
 			
-				
+				<tr>				
+					<td>Volume horaire:</td>
+					<td>
+						<input type="number" name="volume_horaire" />
+					</td>
+				</tr>
 							
 				<tr>
-					<td colspan="2"><button class="btn btn-primary" type="submit">Envoyer</button> </td>
+					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> </td>
 				</tr>
 			</table>
 		</form>
