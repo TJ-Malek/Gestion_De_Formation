@@ -39,6 +39,12 @@ public class CoursService {
 			return repo.AllCoursCursus(cours.getId_Cursus());
 		}
 		
+		// tous les cours actifs d'un cursus
+		
+		public List<Cours> AllCoursActifCursus(Cours cours) {
+			return repo.AllCoursActifCursus(cours.getId_Cursus());
+		}
+		
 		// enregistre le cours s'il n'existe pas dans la BD
 		public Boolean save(Cours cours) {
 			if(FindCours(cours)==null) {

@@ -39,6 +39,12 @@ public class SectionService {
 			return repo.AllSectionChapitre(section.getId_Chapitre());
 		}
 		
+		// toutes les sections actifs d'un chapitre
+		
+		public List<Section> AllSectionActiveChapitre(Section section) {
+			return repo.AllSectionActiveChapitre(section.getId_Chapitre());
+		}
+		
 		// enregistre le section s'il n'existe pas dans la BD
 		public Boolean save(Section section) {
 			if(FindSection(section)==null) {

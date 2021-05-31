@@ -28,6 +28,12 @@ public class CursusService {
 	public List<Cursus> AllCursusFormateur(Cursus cursus) {
 		return repo.AllCursusFormateur(cursus.getId_Formateur());
 	}
+	
+	// tous les cursus actifs
+	
+	public List<Cursus> AllCursusActif() {
+		return repo.AllCursusActif();
+	}
 	// recupere etat cursus
 	
 		public Boolean getEtatCursus(Cursus cursus) {

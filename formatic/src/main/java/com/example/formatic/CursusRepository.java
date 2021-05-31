@@ -16,5 +16,7 @@ public interface CursusRepository  extends JpaRepository<Cursus, Long>  {
 	public void setEtat(Boolean etat,Long id);
 	@Query("select c from Cursus c where c.id_Formateur = ?1 order by date_ajout DESC")
 	public List<Cursus> AllCursusFormateur(Long id_Formateur);
+	@Query("select c from Cursus c where c.etat=1 order by date_ajout DESC")
+	public List<Cursus> AllCursusActif();
 	
 }
