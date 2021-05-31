@@ -1,6 +1,6 @@
 package com.example.formatic;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,7 +91,7 @@ public class FormateurService {
 		Utilisateur user = new Utilisateur();
 		user.setId(formateur.getId());
 		
-		Utilisateur u = serviceUser.get(user);
+	//	Utilisateur u = serviceUser.get(user);
 		
 		Formateur f = repo.findById(formateur.getId()).get();
 		/*f.setEmail(u.getEmail());
