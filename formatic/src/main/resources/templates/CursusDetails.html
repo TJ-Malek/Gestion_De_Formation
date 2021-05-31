@@ -77,8 +77,8 @@
 					<tr>
 					<td>Etat :</td>
 					<td>
-					<a th:if="*{etat == true}"  type="button" class="btn btn-success" th:href="@{'/etatCursus/' + *{id}}">Actif</a>
-                <a th:if="*{etat == false}"  type="button" class="btn btn-danger" th:href="@{'/etatCursus/' + *{id}}">Désactivé</a>
+					<a th:if="*{etat == true}"  type="button" class="btn btn-success" th:href="@{'/etatCursus/'+${id}+'/' + *{id}}">Actif</a>
+                <a th:if="*{etat == false}"  type="button" class="btn btn-danger" th:href="@{'/etatCursus/'+${id}+'/' + *{id}}">Désactivé</a>
 					</td>
 				</tr>		
 				<tr>
