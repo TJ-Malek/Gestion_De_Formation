@@ -189,4 +189,14 @@ public class AppController {
 		
 		return "CursusDetails";		
 	}
+	@RequestMapping(value = "/updateCursus", method = RequestMethod.POST)
+	public String updateCursus(@ModelAttribute("cursus") Cursus cursus) {
+		Cursus c = serviceCursus.get(cursus);
+		cursus.setEtat(c.getEtat());
+		cursus.setDate_ajout(c.getDate_ajout());
+		cursus.setId_Formateur(c.getId_Formateur());
+		serviceCursus.update(cursus);
+		
+		return "redirect:/CursusDetails/"+cursus.getId();
+	}
 }

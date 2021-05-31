@@ -57,7 +57,7 @@
    <div class="list-group"  th:each="cursus : ${listCursusFormateur}">
   <a type="button"  th:href="@{'/CursusDetails/' + ${cursus.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
    <p th:text=${cursus.designation}>designation will be rendered here</p>
-    <span class="badge bg-primary rounded-pill">Volume Horaire : <span th:text=${cursus.volume_horaire}>volume_horaire will be rendered here</span> H</span>
+  <span class="badge bg-primary rounded-pill">Date création : <span th:text=${cursus.date_ajout}>volume_horaire will be rendered here</span></span>  <span class="badge bg-primary rounded-pill">Volume Horaire : <span th:text=${cursus.volume_horaire}>volume_horaire will be rendered here</span> H</span>
   </a>
 
 
