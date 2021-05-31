@@ -35,6 +35,8 @@ public class AppController {
 	private CursusService serviceCursus; 
 	@Autowired
 	private CoursService serviceCours; 
+	@Autowired
+	private ChapitreService serviceChapitre; 
 	//mapping
 	
 	//visiteur
@@ -282,4 +284,74 @@ public class AppController {
 		serviceCours.setEtatCours(cours);
 		return "redirect:/CoursDetails/"+id+"/"+idCursus+"/"+cours.getId();
 	}
+	
+	//chapitre formateur
+		@RequestMapping("/chapitreFormateur/{id}/{idCursus}/{idCours}")
+		public String chapitreFormateur(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,Model model) {
+			Chapitre chapitre = new Chapitre();
+			chapitre.setId_Cours(idCours);
+			List<Chapitre> listChapitreFormateur= serviceChapitre.AllChapitreCours(chapitre);
+			model.addAttribute("listChapitreFormateur", listChapitreFormateur);
+			
+			return "chapitreFormateur";		
+		}
+		@RequestMapping("/ajoutChapitre/{id}/{idCursus}/{idCours}")
+		public String ajoutChapitre(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours) {
+			/*Chapitre chapitre = new Chapitre();
+			chapitre.setId_Formateur(id);*/
+			
+			
+			return "ajoutChapitre";		
+		}
+		@RequestMapping(value = "/saveChapitre/{id}/{idCursus}/{idCours}", method = RequestMethod.POST)
+		public String saveChapitre(@ModelAttribute("chapitre") Chapitre chapitre,@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours) {
+			chapitre.setEtat(false);
+			chapitre.setId_Cours(idCours);
+			Date date = new Date(); 
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			System.out.println(formatter.format(date));
+			chapitre.setDate_ajout(formatter.format(date));
+			Boolean test = serviceChapitre.save(chapitre);
+			
+			return "redirect:/chapitreFormateur/"+idCursus+'/'+id+'/'+chapitre.getId_Cours();
+		}
+		@RequestMapping("/ChapitreDetails/{id}/{idCursus}/{idCours}/{idChapitre}")
+		public String detailsChapitre(@PathVariable(name = "id") Long id,@PathVariable(name = "idChapitre") Long idChapitre,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,Model model) {
+			Chapitre cu = new Chapitre();
+			cu.setId(idChapitre);
+			Chapitre chapitre = serviceChapitre.get(cu);
+			model.addAttribute("chapitre", chapitre);
+			
+			return "ChapitreDetails";		
+		}
+		@RequestMapping(value = "/updateChapitre", method = RequestMethod.POST)
+		public String updateChapitre(@ModelAttribute("chapitre") Chapitre chapitre) {
+			Chapitre c = serviceChapitre.get(chapitre);
+			chapitre.setEtat(c.getEtat());
+			chapitre.setDate_ajout(c.getDate_ajout());
+			chapitre.setId_Cours(c.getId_Cours());
+			Cours cu = new Cours();
+			cu.setId(chapitre.getId_Cours());
+			Cours cur = serviceCours.get(cu);
+			Cursus curs = new Cursus();
+			curs.setId(cur.getId_Cursus());
+			Long formateurId=serviceCursus.get(curs).getId_Formateur();
+			serviceChapitre.update(chapitre);
+			
+			return "redirect:/ChapitreDetails/"+formateurId+'/'+cur.getId_Cursus()+'/'+chapitre.getId_Cours()+"/"+chapitre.getId();
+		}
+		@RequestMapping("/deleteChapitre/{id}/{idCursus}/{idCours}/{idChapitre}")
+		public String deleteChapitre(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idChapitre") Long idChapitre,@PathVariable(name = "idCours") Long idCours) {
+			Chapitre chapitre = new Chapitre();
+			chapitre.setId(idChapitre);
+			serviceChapitre.delete(chapitre);
+			return "redirect:/chapitreFormateur/"+id+"/"+idCursus+'/'+idCours;
+		}
+		@RequestMapping("/etatChapitre/{id}/{idCursus}/{idCours}/{idChapitre}")
+		public String etatChapitre(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,@PathVariable(name = "idChapitre") Long idChapitre) {
+			Chapitre chapitre= new Chapitre();
+			chapitre.setId(idChapitre);
+			serviceChapitre.setEtatChapitre(chapitre);
+			return "redirect:/ChapitreDetails/"+id+"/"+idCursus+'/'+idCours+"/"+chapitre.getId();
+		}
 }
