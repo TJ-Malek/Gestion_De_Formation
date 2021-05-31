@@ -180,4 +180,13 @@ public class AppController {
 		
 		return "redirect:/cursusFormateur/"+cursus.getId_Formateur();
 	}
+	@RequestMapping("/CursusDetails/{id}")
+	public String detailsCursus(@PathVariable(name = "id") Long id,Model model) {
+		Cursus cu = new Cursus();
+		cu.setId(id);
+		Cursus cursus = serviceCursus.get(cu);
+		model.addAttribute("cursus", cursus);
+		
+		return "CursusDetails";		
+	}
 }
