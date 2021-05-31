@@ -37,7 +37,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" th:href="@{'/demandeFormateur/' + ${id}}">Demande formateur</a></li>
-            <li><a class="dropdown-item" th:href="@{'/coursFormateur/' + ${id}}">Mes cursus</a></li>
+            <li><a class="dropdown-item" th:href="@{'/cursusFormateur/' + ${id}}">Mes cursus</a></li>
             
           </ul>
         </li>
@@ -74,7 +74,7 @@
 				</tr>		
 				<tr>
 					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> 
-					<a class="btn btn-primary" type="button" th:href="@{'/chapitreFormateur/' + ${id} + '/' +  *{id}}">Gestion des chapitres</a> </td>
+					<a class="btn btn-primary" type="button" th:href="@{'/chapitreFormateur/' + ${id} +'/'+ ${idCursus}+ '/' +  *{id}}">Gestion des chapitres</a> </td>
 				</tr>
 			</table>
 		</form>

@@ -37,7 +37,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" th:href="@{'/demandeFormateur/' + ${id}}">Demande formateur</a></li>
-            <li><a class="dropdown-item" href="#">Mes cursus</a></li>
+            <li><a class="dropdown-item" th:href="@{'/cursusFormateur/' + ${id}}">Mes cursus</a></li>
             
           </ul>
         </li>
@@ -55,7 +55,7 @@
     <span class="badge bg-primary rounded-pill"><!-- <p th:text=${cours.volume_horaire}>volume_horaire will be rendered here</p> --></span>
   </a>
    <div class="list-group col-6"  th:each="cours : ${listCoursFormateur}">
-  <a type="button" style="display:inline!important;" th:href="@{'/CoursDetails/' + ${id} + '/' + ${cours.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
+  <a type="button" style="display:inline!important;" th:href="@{'/CoursDetails/' + ${id}+'/'+ ${idCursus} + '/' + ${cours.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
    <p th:text=${cours.designation}>designation will be rendered here</p>
   <span class="badge bg-primary rounded-pill">Date création : <span th:text=${cours.date_ajout}>volume_horaire will be rendered here</span></span>  
 
@@ -79,7 +79,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-         <a type="button" class="btn btn-primary" th:href="@{'/deleteCours/' + ${id} + '/' + ${cours.id}}">Oui</a>
+         <a type="button" class="btn btn-primary" th:href="@{'/deleteCours/' + ${id}+'/'+ ${idCursus} + '/' + ${cours.id}}">Oui</a>
       </div>
     </div>
   </div>
