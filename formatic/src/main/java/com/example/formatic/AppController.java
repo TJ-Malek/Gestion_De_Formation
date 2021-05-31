@@ -401,12 +401,15 @@ public class AppController {
 			Section c = serviceSection.get(section);
 			section.setEtat(c.getEtat());
 			section.setDate_ajout(c.getDate_ajout());
-			section.setId_Chapitre(c.getId_Chapitre());
+		
 			Chapitre ch= new Chapitre();
 			ch.setId(c.getId_Chapitre());
-			 Long idCours = serviceChapitre.get(ch).getId_Cours();
+			Chapitre chap = serviceChapitre.get(ch);
+			section.setId_Chapitre(chap.getId());
+			Long idCours = chap.getId_Cours();
+			
 			Cours cu = new Cours();
-			cu.setId(section.getId_Chapitre());
+			cu.setId(idCours);
 			Cours cur = serviceCours.get(cu);
 			Cursus curs = new Cursus();
 			curs.setId(cur.getId_Cursus());
