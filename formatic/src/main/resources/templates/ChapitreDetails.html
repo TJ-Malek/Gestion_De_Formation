@@ -3,11 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
-<title>profil</title>
+<title>Chapitre</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
 
 </head>
-<body>
+<body th:object="${chapitre}">
 <nav class="navbar navbar-expand-lg navbar-primary bg-dark" >
   <div class="container-fluid">
     <a class="navbar-brand" href="chapitre">Formatic</a>
@@ -50,19 +50,31 @@
 </nav>
 <div class="card mt-4 border-0">
   <div class="card-body">
-   <form action="#" th:action="@{'/saveChapitre/'+ ${id} + '/'+ ${idCursus}+'/' + ${idCours}}"
+   <form action="#" th:action="@{/updateChapitre}" 
 			method="post" class="offset-3">
-	
+	<input type="hidden" th:field="*{id}" />
 			<table border="0" cellpadding="10">
 					
 				<tr>				
 					<td>Designation:</td>
 					<td>
-						<input type="text" name="designation" />
+						<input type="text" th:field="*{designation}" />
 					</td>
 				</tr>
 			
-					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> </td>
+					
+			
+				
+					<tr>
+					<td>Etat :</td>
+					<td>
+					<a th:if="*{etat == true}"  type="button" class="btn btn-success" th:href="@{'/etatChapitre/'+${id}+'/'+${idCursus}+'/' +${idCours}+'/'+ *{id}}">Actif</a>
+                <a th:if="*{etat == false}"  type="button" class="btn btn-danger" th:href="@{'/etatChapitre/'+${id}+'/'+${idCursus}+'/' +${idCours}+'/'+ *{id}}">Désactivé</a>
+					</td>
+				</tr>		
+				<tr>
+					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> 
+					<a class="btn btn-primary" type="button" th:href="@{'/chapitreFormateur/' + ${id} +'/'+ ${idCursus}+ '/'+${idCours}+'/' +  *{id}}">Gestion des sections</a> </td>
 				</tr>
 			</table>
 		</form>

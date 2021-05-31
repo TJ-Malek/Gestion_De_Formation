@@ -37,6 +37,8 @@ public class AppController {
 	private CoursService serviceCours; 
 	@Autowired
 	private ChapitreService serviceChapitre; 
+	@Autowired
+	private SectionService serviceSection; 
 	//mapping
 	
 	//visiteur
@@ -313,7 +315,7 @@ public class AppController {
 			chapitre.setDate_ajout(formatter.format(date));
 			Boolean test = serviceChapitre.save(chapitre);
 			
-			return "redirect:/chapitreFormateur/"+idCursus+'/'+id+'/'+chapitre.getId_Cours();
+			return "redirect:/chapitreFormateur/"+id+'/'+idCursus+'/'+chapitre.getId_Cours();
 		}
 		@RequestMapping("/ChapitreDetails/{id}/{idCursus}/{idCours}/{idChapitre}")
 		public String detailsChapitre(@PathVariable(name = "id") Long id,@PathVariable(name = "idChapitre") Long idChapitre,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,Model model) {
@@ -353,5 +355,78 @@ public class AppController {
 			chapitre.setId(idChapitre);
 			serviceChapitre.setEtatChapitre(chapitre);
 			return "redirect:/ChapitreDetails/"+id+"/"+idCursus+'/'+idCours+"/"+chapitre.getId();
+		}
+		
+		//section formateur
+		@RequestMapping("/sectionFormateur/{id}/{idCursus}/{idCours}/{idChapitre}")
+		public String sectionFormateur(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,@PathVariable(name = "idChapitre") Long idChapitre,Model model) {
+			Section section = new Section();
+			section.setId_Chapitre(idChapitre);
+			List<Section> listSectionFormateur= serviceSection.AllSectionChapitre(section);
+			model.addAttribute("listSectionFormateur", listSectionFormateur);
+			
+			return "sectionFormateur";		
+		}
+		@RequestMapping("/ajoutSection/{id}/{idCursus}/{idCours}/{idChapitre}")
+		public String ajoutSection(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,@PathVariable(name = "idChapitre") Long idChapitre) {
+			/*Section section = new Section();
+			section.setId_Formateur(id);*/
+			
+			
+			return "ajoutSection";		
+		}
+		@RequestMapping(value = "/saveSection/{id}/{idCursus}/{idCours}/{idChapitre}", method = RequestMethod.POST)
+		public String saveSection(@ModelAttribute("section") Section section,@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,@PathVariable(name = "idChapitre") Long idChapitre) {
+			section.setEtat(false);
+			section.setId_Chapitre(idChapitre);
+			Date date = new Date(); 
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			System.out.println(formatter.format(date));
+			section.setDate_ajout(formatter.format(date));
+			Boolean test = serviceSection.save(section);
+			
+			return "redirect:/sectionFormateur/"+id+"/"+idCursus+"/"+idCours+"/"+section.getId_Chapitre();
+		}
+		@RequestMapping("/SectionDetails/{id}/{idCursus}/{idCours}/{idChapitre}/{idSection}")
+		public String detailsSection(@PathVariable(name = "id") Long id,@PathVariable(name = "idSection") Long idSection,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,@PathVariable(name = "idChapitre") Long idChapitre,Model model) {
+			Section cu = new Section();
+			cu.setId(idSection);
+			Section section = serviceSection.get(cu);
+			model.addAttribute("section", section);
+			
+			return "SectionDetails";		
+		}
+		@RequestMapping(value = "/updateSection", method = RequestMethod.POST)
+		public String updateSection(@ModelAttribute("section") Section section) {
+			Section c = serviceSection.get(section);
+			section.setEtat(c.getEtat());
+			section.setDate_ajout(c.getDate_ajout());
+			section.setId_Chapitre(c.getId_Chapitre());
+			Chapitre ch= new Chapitre();
+			ch.setId(c.getId_Chapitre());
+			 Long idCours = serviceChapitre.get(ch).getId_Cours();
+			Cours cu = new Cours();
+			cu.setId(section.getId_Chapitre());
+			Cours cur = serviceCours.get(cu);
+			Cursus curs = new Cursus();
+			curs.setId(cur.getId_Cursus());
+			Long formateurId=serviceCursus.get(curs).getId_Formateur();
+			serviceSection.update(section);
+			
+			return "redirect:/SectionDetails/"+formateurId+"/"+cur.getId_Cursus()+"/"+idCours+"/"+section.getId_Chapitre()+"/"+section.getId();
+		}
+		@RequestMapping("/deleteSection/{id}/{idCursus}/{idCours}/{idChapitre}/{idSection}")
+		public String deleteSection(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idSection") Long idSection,@PathVariable(name = "idCours") Long idCours,@PathVariable(name = "idChapitre") Long idChapitre) {
+			Section section = new Section();
+			section.setId(idSection);
+			serviceSection.delete(section);
+			return "redirect:/sectionFormateur/"+id+"/"+idCursus+"/"+idCours+"/"+idChapitre;
+		}
+		@RequestMapping("/etatSection/{id}/{idCursus}/{idCours}/{idChapitre}/{idSection}")
+		public String etatSection(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,@PathVariable(name = "idCours") Long idCours,@PathVariable(name = "idSection") Long idSection,@PathVariable(name = "idChapitre") Long idChapitre) {
+			Section section= new Section();
+			section.setId(idSection);
+			serviceSection.setEtatSection(section);
+			return "redirect:/SectionDetails/"+id+"/"+idCursus+'/'+idCours+"/"+idChapitre+"/"+section.getId();
 		}
 }

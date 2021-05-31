@@ -35,7 +35,7 @@ public class SectionService {
 		}
 		// toutes les sections d'un chapitre
 		
-		public List<Section> AllSectionCursus(Section section) {
+		public List<Section> AllSectionChapitre(Section section) {
 			return repo.AllSectionChapitre(section.getId_Chapitre());
 		}
 		
