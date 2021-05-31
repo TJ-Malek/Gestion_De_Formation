@@ -7,7 +7,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
 
 </head>
-<body th:object="${user}">
+<body th:object="${cours}">
 <nav class="navbar navbar-expand-lg navbar-primary bg-dark" >
   <div class="container-fluid">
     <a class="navbar-brand" href="cours">Formatic</a>
@@ -23,7 +23,7 @@
      
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Cours
+            Cursus
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="#">Tous les cursus</a></li>
@@ -37,7 +37,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" th:href="@{'/demandeFormateur/' + ${id}}">Demande formateur</a></li>
-            <li><a class="dropdown-item" href="#">Mes cursus</a></li>
+            <li><a class="dropdown-item" th:href="@{'/coursFormateur/' + ${id}}">Mes cursus</a></li>
             
           </ul>
         </li>
@@ -48,47 +48,36 @@
     </div>
   </div>
 </nav>
-<div class="card mt-4 border-0" >
+<div class="card mt-4 border-0">
   <div class="card-body">
-   <a type="button" th:href="@{'/ajoutCours/' + ${id} + '/' + ${idCursus}}" class="btn btn-primary " aria-current="true">
-   Ajouter cours
-    <span class="badge bg-primary rounded-pill"><!-- <p th:text=${cours.volume_horaire}>volume_horaire will be rendered here</p> --></span>
-  </a>
-   <div class="list-group col-6"  th:each="cours : ${listCoursFormateur}">
-  <a type="button" style="display:inline!important;" th:href="@{'/CoursDetails/' + ${id} + '/' + ${cours.id}}" class="list-group-item d-flex justify-content-between align-items-center" aria-current="true">
-   <p th:text=${cours.designation}>designation will be rendered here</p>
-  <span class="badge bg-primary rounded-pill">Date création : <span th:text=${cours.date_ajout}>volume_horaire will be rendered here</span></span>  
-
-  </a>
-<!-- supprimer -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-danger col-2" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${cours.id}">
-   Supprimer
-</button>
-
-<!-- Modal -->
-<div class="modal fade" th:id="'SupprimerModel'+${cours.id}" tabindex="-1" th:attr="aria-labelledby='SupprimerModel'+${cours.id}" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" th:id="'SupprimerModel'+${cours.id}"><span style="color:#0D6EFD;">Confirmation</span></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-  <span style="color:#0D6EFD;">êtes-vous sûr de vouloir supprimer?</span>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-         <a type="button" class="btn btn-primary" th:href="@{'/deleteCours/' + ${id} + '/' + ${cours.id}}">Oui</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- supprimer -->
- <p th:if="${listCoursFormateur == null}" style="color:#0D6EFD;">Vous n'avez pas encore ajouté de cours</p>
- 
-</div>
-
+   <form action="#" th:action="@{/updateCours}" 
+			method="post" class="offset-3">
+	<input type="hidden" th:field="*{id}" />
+			<table border="0" cellpadding="10">
+					
+				<tr>				
+					<td>Designation:</td>
+					<td>
+						<input type="text" th:field="*{designation}" />
+					</td>
+				</tr>
+			
+					
+			
+				
+					<tr>
+					<td>Etat :</td>
+					<td>
+					<a th:if="*{etat == true}"  type="button" class="btn btn-success" th:href="@{'/etatCours/' + *{id}}">Actif</a>
+                <a th:if="*{etat == false}"  type="button" class="btn btn-danger" th:href="@{'/etatCours/' + *{id}}">Désactivé</a>
+					</td>
+				</tr>		
+				<tr>
+					<td colspan="2"><button class="btn btn-primary" type="submit">Enregistrer</button> 
+					<a class="btn btn-primary" type="button" th:href="@{'/chapitreFormateur/' + ${id} + '/' +  *{id}}">Gestion des chapitres</a> </td>
+				</tr>
+			</table>
+		</form>
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

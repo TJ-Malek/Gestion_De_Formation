@@ -213,7 +213,7 @@ public class AppController {
 	@RequestMapping("/coursFormateur/{id}/{idCursus}")
 	public String coursFormateur(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus,Model model) {
 		Cours cours = new Cours();
-		cours.setId_Cursus(id);
+		cours.setId_Cursus(idCursus);
 		List<Cours> listCoursFormateur= serviceCours.AllCoursCursus(cours);
 		model.addAttribute("listCoursFormateur", listCoursFormateur);
 		
@@ -230,14 +230,14 @@ public class AppController {
 	@RequestMapping(value = "/saveCours/{id}/{idCursus}", method = RequestMethod.POST)
 	public String saveCours(@ModelAttribute("cours") Cours cours,@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus) {
 		cours.setEtat(false);
-		cours.setId_Cursus(id);
+		cours.setId_Cursus(idCursus);
 		Date date = new Date(); 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		System.out.println(formatter.format(date));
 		cours.setDate_ajout(formatter.format(date));
 		Boolean test = serviceCours.save(cours);
 		
-		return "redirect:/coursFormateur/"+id+cours.getId_Cursus();
+		return "redirect:/coursFormateur/"+id+'/'+cours.getId_Cursus();
 	}
 	@RequestMapping("/CoursDetails/{id}/{idCours}")
 	public String detailsCours(@PathVariable(name = "id") Long id,@PathVariable(name = "idCours") Long idCours,Model model) {
