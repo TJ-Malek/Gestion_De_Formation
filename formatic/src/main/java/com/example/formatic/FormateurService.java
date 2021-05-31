@@ -20,13 +20,13 @@ public class FormateurService {
 	
 	// Verifie si le formateur existe dans la BD
 	
-		public Formateur findFormateur(Formateur formateur) {
+	/*	public Formateur findFormateur(Formateur formateur) {
 			/*Utilisateur user = new Utilisateur();
 			user.setId(formateur.getId());
-			Utilisateur u = serviceUser.get(user);*/
+			Utilisateur u = serviceUser.get(user);
 			return repo.findFormateur(formateur.getTelephone());
 			
-		}
+		}*/
 	// recupere etat formateur
 	
 		public Boolean getEtatFormateur(Formateur formateur) {
@@ -64,7 +64,7 @@ public class FormateurService {
 	
 	// enregistre le formateur s'il n'existe pas dans la BD
 	public Boolean save(Formateur formateur) {
-		if(findFormateur(formateur)==null) {
+		if(get(formateur)==null) {
 				repo.save(formateur);
 				return true;
 	}
