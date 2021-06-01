@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : Dim 30 mai 2021 à 14:14
+-- Généré le : mar. 01 juin 2021 à 02:59
 -- Version du serveur :  10.4.17-MariaDB
 -- Version de PHP : 8.0.0
 
@@ -35,6 +35,13 @@ CREATE TABLE `chapitre` (
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `chapitre`
+--
+
+INSERT INTO `chapitre` (`id`, `id_Cours`, `designation`, `date_ajout`, `etat`) VALUES
+(2, 7, 'Structures conditionnelles', '2021-05-31 23:36:26', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -45,10 +52,17 @@ CREATE TABLE `cours` (
   `id` bigint(20) NOT NULL,
   `id_Cursus` bigint(20) NOT NULL,
   `designation` varchar(500) NOT NULL,
-  `image` varchar(500) NOT NULL,
+  `image` varchar(500) DEFAULT NULL,
   `date_ajout` datetime NOT NULL,
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `cours`
+--
+
+INSERT INTO `cours` (`id`, `id_Cursus`, `designation`, `image`, `date_ajout`, `etat`) VALUES
+(7, 2, 'PHP', NULL, '2021-05-31 16:41:59', 0);
 
 -- --------------------------------------------------------
 
@@ -60,13 +74,20 @@ CREATE TABLE `cursus` (
   `id` bigint(20) NOT NULL,
   `designation` varchar(500) NOT NULL,
   `contenu` varchar(500) NOT NULL,
-  `pdf` varchar(500) NOT NULL,
-  `image` varchar(500) NOT NULL,
+  `pdf` varchar(500) DEFAULT NULL,
+  `image` varchar(500) DEFAULT NULL,
   `volume_horaire` int(11) NOT NULL,
   `date_ajout` datetime NOT NULL,
   `id_Formateur` bigint(20) NOT NULL,
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `cursus`
+--
+
+INSERT INTO `cursus` (`id`, `designation`, `contenu`, `pdf`, `image`, `volume_horaire`, `date_ajout`, `id_Formateur`, `etat`) VALUES
+(2, 'PHP', 'PHP5,SYMFONY', NULL, NULL, 10, '2021-05-31 16:41:43', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -77,10 +98,17 @@ CREATE TABLE `cursus` (
 CREATE TABLE `cursus_suivis` (
   `id` bigint(20) NOT NULL,
   `id_Utilisateur` bigint(20) NOT NULL,
-  `id_Chapitre` bigint(20) NOT NULL,
-  `id_Cours` bigint(20) NOT NULL,
+  `id_Chapitre` bigint(20) DEFAULT NULL,
+  `id_Cours` bigint(20) DEFAULT NULL,
   `id_Cursus` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `cursus_suivis`
+--
+
+INSERT INTO `cursus_suivis` (`id`, `id_Utilisateur`, `id_Chapitre`, `id_Cours`, `id_Cursus`) VALUES
+(1, 8, NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -112,12 +140,18 @@ CREATE TABLE `section` (
   `id` bigint(20) NOT NULL,
   `id_Chapitre` bigint(20) NOT NULL,
   `designation` varchar(500) NOT NULL,
-  `image` varchar(500) NOT NULL,
-  `titre` varchar(500) NOT NULL,
+  `image` varchar(500) DEFAULT NULL,
   `contenu` varchar(500) NOT NULL,
   `date_ajout` datetime NOT NULL,
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `section`
+--
+
+INSERT INTO `section` (`id`, `id_Chapitre`, `designation`, `image`, `contenu`, `date_ajout`, `etat`) VALUES
+(1, 2, 'if else', NULL, 'if else, permet de tester si une condtion est respectée ou non.Dans notre exmple ci dessous, si la condition est respectée, elle renvoit \"instruction1\", sinon \"instruction2\"\r\n<?php\r\nif(condition) {\r\n    // instruction1;\r\n}\r\nelse{\r\n    // instruction2;\r\n}\r\n?> ', '2021-06-01 00:26:22', 0);
 
 -- --------------------------------------------------------
 
@@ -206,31 +240,31 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `chapitre`
 --
 ALTER TABLE `chapitre`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `cours`
 --
 ALTER TABLE `cours`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `cursus`
 --
 ALTER TABLE `cursus`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `cursus_suivis`
 --
 ALTER TABLE `cursus_suivis`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `section`
 --
 ALTER TABLE `section`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
