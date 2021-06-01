@@ -512,27 +512,32 @@ public class AppController {
 		// lire cursus etudiant
 				@RequestMapping("/commencerCursusEtudiant/{id}/{idCursus}")
 				public String commencerCursusEtudiant(Model model,@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus) {
-					/*Cursus cursus = new Cursus();
-					cursus.setId(idCursus);*/
+					Cursus cursus = new Cursus();
+					cursus.setId(idCursus);
 					Cours cours = new Cours();
 					cours.setId_Cursus(idCursus);
 					List<Cours> listCours = serviceCours.AllCoursActifCursus(cours);
-					model.addAttribute("listCours", listCours);
-					/*Cursus cursus = new Cursus();
-					cursus.setId_Formateur(id);*/
-				/*	List<Cursus> listCursusEtudiant = new ArrayList<Cursus>();
-					
+					model.addAttribute("listCours", listCours);//list cours object
 					Cursus_Suivis cursus_suivis = new Cursus_Suivis();
-					cursus_suivis.setId_Utilisateur(id);
-					List<Cursus_Suivis> listCursusSuivis = serviceCursus_Suivis.AllCursus_SuivisCursus(cursus_suivis);
-					 for (Cursus_Suivis cs : listCursusSuivis) {
-				         Long CursusId = cs.getId_Cursus();
-				         Cursus cursus = new Cursus();
-				         cursus.setId(CursusId);
-				         listCursusEtudiant.add(serviceCursus.get(cursus));
-				      }
-					model.addAttribute("listCursusEtudiant", listCursusEtudiant);*/
+					cursus_suivis.setId(idCursus);
+					Cursus_Suivis cursus_suivis2 =  serviceCursus_Suivis.get(cursus_suivis);
 					
-					return "CursusEtudiant";		
+					Cours c = new Cours();
+					c.setId(cursus_suivis2.getId_Cours());
+					Cours coursToDisplay=serviceCours.get(c);
+					model.addAttribute("coursToDisplay", coursToDisplay);//cours object
+					Chapitre ch = new Chapitre();
+					ch.setId_Cours(coursToDisplay.getId());
+					List<Chapitre> listChapitre=serviceChapitre.AllChapitreActifCours(ch);
+					model.addAttribute("listChapitre", listChapitre);//listChapitre object
+					Chapitre chapitreToDisplay=serviceChapitre.get(ch);
+					model.addAttribute("chapitreToDisplay", chapitreToDisplay);//chapitreToDisplay object
+					Section section = new Section();
+					section.setId_Chapitre(chapitreToDisplay.getId());
+					List<Section>listSection = serviceSection.AllSectionActiveChapitre(section);
+					model.addAttribute("listSection", listSection);//listSection object
+					
+					
+					return "commencerCursusEtudiant";		
 				}
 }
