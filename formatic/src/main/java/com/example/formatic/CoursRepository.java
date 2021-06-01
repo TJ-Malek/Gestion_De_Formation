@@ -14,8 +14,10 @@ public interface CoursRepository extends JpaRepository<Cours, Long>  {
 	@Modifying
 	@Query("update Cours c  set c.etat =?1 where c.id = ?2")
 	public void setEtat(Boolean etat,Long id);
-	@Query("select c from Cours c where c.id_Cursus = ?1 order by date_ajout DESC")
+	@Query("select c from Cours c where c.id_Cursus = ?1 order by c.date_ajout DESC")
 	public List<Cours> AllCoursCursus(Long id_Cursus);
-	@Query("select c from Cours c where c.id_Cursus = ?1 and c.etat=1 order by date_ajout DESC")
+	@Query("select c from Cours c where c.id_Cursus = ?1 and c.etat=1 order by c.date_ajout DESC")
 	public List<Cours> AllCoursActifCursus(Long id_Cursus);
+	@Query("select c from Cours c where c.id_Cursus = ?1 and c.etat=1 and c.date_ajout in (select MIN(c.date_ajout) from c)")
+	public Cours FirstCoursCursus(Long id_Cursus);
 }

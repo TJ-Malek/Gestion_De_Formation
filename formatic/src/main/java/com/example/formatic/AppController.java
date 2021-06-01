@@ -39,6 +39,8 @@ public class AppController {
 	private ChapitreService serviceChapitre; 
 	@Autowired
 	private SectionService serviceSection; 
+	@Autowired
+	private Cursus_SuivisService serviceCursus_Suivis; 
 	//mapping
 	
 	//visiteur
@@ -435,13 +437,35 @@ public class AppController {
 		
 		//etudiant
 		
-		@RequestMapping("/tousCursusActif")
-		public String tousCursusActif(Model model) {
+		@RequestMapping("/tousCursusActif/{id}")
+		public String tousCursusActif(Model model,@PathVariable(name = "id") Long id) {
 			/*Cursus cursus = new Cursus();
 			cursus.setId_Formateur(id);*/
 			List<Cursus> listCursusActif = serviceCursus.AllCursusActif();
 			model.addAttribute("listCursusActif", listCursusActif);
 			
 			return "tousCursusActif";		
+		}
+		
+		@RequestMapping("/ajoutCursusEtudiant/{id}/{idCursus}")
+		public String ajoutCursusEtudiant(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus) {
+			Cursus_Suivis cs = new Cursus_Suivis();
+			cs.setId_Cursus(idCursus);
+			cs.setId_Utilisateur(id);
+			Cursus cur = new Cursus();
+			cur.setId(idCursus);
+			Cours coursToAdd = serviceCours.FirstCoursCursus(cur);
+			if(coursToAdd!=null) {
+			cs.setId_Cours(coursToAdd.getId());
+			
+			Cours c = new Cours();
+			c.setId(coursToAdd.getId());
+			Chapitre chapitreToAdd = serviceChapitre.FirstChapitreCursus(c);
+			if(chapitreToAdd!=null) {
+			cs.setId_Chapitre(chapitreToAdd.getId());
+			}
+			}
+			serviceCursus_Suivis.save(cs);
+			return "redirect:/tousCursusActif/"+id;
 		}
 }

@@ -45,6 +45,12 @@ public class CoursService {
 			return repo.AllCoursActifCursus(cours.getId_Cursus());
 		}
 		
+		// premier cours actif d'un cursus
+		
+		public Cours FirstCoursCursus(Cursus cursus) {
+			return repo.FirstCoursCursus(cursus.getId());
+		}
+		
 		// enregistre le cours s'il n'existe pas dans la BD
 		public Boolean save(Cours cours) {
 			if(FindCours(cours)==null) {

@@ -45,6 +45,11 @@ public class ChapitreService {
 			return repo.AllChapitreActifCours(chapitre.getId_Cours());
 		}
 		
+	// premier chapitre actif d'un cours
+		
+		public Chapitre FirstChapitreCursus(Cours cours) {
+			return repo.FirstChapitreCursus(cours.getId());
+		}
 		// enregistre le chapitre s'il n'existe pas dans la BD
 		public Boolean save(Chapitre chapitre) {
 			if(FindChapitre(chapitre)==null) {

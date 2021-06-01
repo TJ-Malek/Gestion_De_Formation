@@ -14,8 +14,8 @@ public interface SectionRepository extends JpaRepository<Section, Long>  {
 	@Modifying
 	@Query("update Section s  set s.etat =?1 where s.id = ?2")
 	public void setEtat(Boolean etat,Long id);
-	@Query("select s from Section s where s.id_Chapitre  = ?1 order by date_ajout DESC")
+	@Query("select s from Section s where s.id_Chapitre  = ?1 order by s.date_ajout DESC")
 	public List<Section> AllSectionChapitre(Long id_Chapitre);
-	@Query("select s from Section s where s.id_Chapitre  = ?1 and s.etat=1 order by date_ajout DESC")
+	@Query("select s from Section s where s.id_Chapitre  = ?1 and s.etat=1 order by s.date_ajout DESC")
 	public List<Section> AllSectionActiveChapitre(Long id_Chapitre);
 }

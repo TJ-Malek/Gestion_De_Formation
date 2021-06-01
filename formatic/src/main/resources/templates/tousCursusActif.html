@@ -10,7 +10,7 @@
 <body th:object="${user}">
 <nav class="navbar navbar-expand-lg navbar-primary bg-dark" >
   <div class="container-fluid">
-    <a class="navbar-brand" href="/tousCursusActif">Formatic</a>
+    <a class="navbar-brand" th:href="@{'/tousCursusActif/' + ${id}}">Formatic</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,7 +26,7 @@
             Cursus
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/tousCursusActif">Tous les cursus</a></li>
+            <li><a class="dropdown-item" th:href="@{'/tousCursusActif/' + ${id}}">Tous les cursus</a></li>
             <li><a class="dropdown-item" href="#">Mes cursus</a></li>
             
           </ul>
@@ -60,6 +60,7 @@
  	 
 		 <span class="badge bg-primary rounded-pill">Date création : <span th:text=${cursus.date_ajout}>date will be rendered here</span></span>  <span class="badge bg-primary rounded-pill">Volume Horaire : <span th:text=${cursus.volume_horaire}>volume_horaire will be rendered here</span> H</span>
      
+     	
 	 </button>
     </h2>
     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -70,7 +71,9 @@
       </div>
     </div>
   </div>
+  <a class="btn btn-primary mr-5" th:href="@{'/ajoutCursusEtudiant/' + ${id} + '/' + ${cursus.id}}" type="button">S'inscrire</a>
 </div>
+
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
