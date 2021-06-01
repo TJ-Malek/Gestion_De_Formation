@@ -111,10 +111,12 @@ public class AppController {
 	}
 	@RequestMapping(value = "/saveFormateur/{id}", method = RequestMethod.POST)
 	public String saveFormateur(@ModelAttribute("formateur") Formateur formateur,@PathVariable(name = "id") Long id) {
+		System.out.println("id = "+id);
 		formateur.setEtat(false);
 		formateur.setId(id);
+		System.out.println("formateur id = "+formateur.getId());
 		Boolean test = serviceFormateur.save(formateur);
-		System.out.println("formateur = "+test);
+		
 		return "redirect:/profil/"+formateur.getId();
 	}
 	//admin

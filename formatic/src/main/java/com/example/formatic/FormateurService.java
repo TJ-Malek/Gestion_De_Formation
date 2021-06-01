@@ -20,13 +20,13 @@ public class FormateurService {
 	
 	// Verifie si le formateur existe dans la BD
 	
-	/*	public Formateur findFormateur(Formateur formateur) {
+		public Formateur findFormateur(Formateur formateur) {
 			/*Utilisateur user = new Utilisateur();
 			user.setId(formateur.getId());
-			Utilisateur u = serviceUser.get(user);
-			return repo.findFormateur(formateur.getTelephone());
+			Utilisateur u = serviceUser.get(user);*/
+			return repo.findFormateur(formateur.getId());
 			
-		}*/
+		}
 	// recupere etat formateur
 	
 		public Boolean getEtatFormateur(Formateur formateur) {
@@ -64,7 +64,9 @@ public class FormateurService {
 	
 	// enregistre le formateur s'il n'existe pas dans la BD
 	public Boolean save(Formateur formateur) {
-		if(get(formateur)==null) {
+		System.out.println("ok");
+	
+		if(findFormateur(formateur)==null) {
 				repo.save(formateur);
 				return true;
 	}
@@ -88,18 +90,19 @@ public class FormateurService {
 	
 	// recupere formateur par son id (sans infos utilisateur)
 	public Formateur get(Formateur formateur) {
-		Utilisateur user = new Utilisateur();
-		user.setId(formateur.getId());
+		/*Utilisateur user = new Utilisateur();
+		user.setId(formateur.getId());*/
 		
 	//	Utilisateur u = serviceUser.get(user);
-		
-		Formateur f = repo.findById(formateur.getId()).get();
+		System.out.println("*********** formateur idddddddddddddddddddddddddddddd = "+formateur.getId());	
+	return repo.findById(formateur.getId()).get();
+		//System.out.println("*********** formateur = "+f);
 		/*f.setEmail(u.getEmail());
 		f.setMdp(u.getMdp());
 		f.setNom(u.getNom());
 		f.setPrenom(u.getPrenom());
 		f.setRole(u.getRole());*/
-		return f;
+		//return f;
 	}
 	
 	// supprime formateur

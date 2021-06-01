@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 
 public interface FormateurRepository extends JpaRepository<Formateur, Long> {
-	@Query("select f from Formateur f where f.telephone = ?1")
-	public Formateur findFormateur(int telephone);
+	@Query("select f from Formateur f where f.id = ?1")
+	public Formateur findFormateur(Long id);
 	@Query("select f.etat from Formateur f where f.id = ?1")
 	public  Boolean getEtat(Long id);
 	@Modifying
