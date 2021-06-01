@@ -461,7 +461,7 @@ public class AppController {
 			
 			Cours c = new Cours();
 			c.setId(coursToAdd.getId());
-			Chapitre chapitreToAdd = serviceChapitre.FirstChapitreCursus(c);
+			Chapitre chapitreToAdd = serviceChapitre.FirstChapitreCours(c);
 			if(chapitreToAdd!=null) {
 			cs.setId_Chapitre(chapitreToAdd.getId());
 			}
@@ -519,24 +519,34 @@ public class AppController {
 					List<Cours> listCours = serviceCours.AllCoursActifCursus(cours);
 					model.addAttribute("listCours", listCours);//list cours object
 					Cursus_Suivis cursus_suivis = new Cursus_Suivis();
-					cursus_suivis.setId(idCursus);
-					Cursus_Suivis cursus_suivis2 =  serviceCursus_Suivis.get(cursus_suivis);
+					cursus_suivis.setId_Cursus(idCursus);
+					cursus_suivis.setId_Utilisateur(id);
 					
-					Cours c = new Cours();
-					c.setId(cursus_suivis2.getId_Cours());
-					Cours coursToDisplay=serviceCours.get(c);
-					model.addAttribute("coursToDisplay", coursToDisplay);//cours object
+					Cursus_Suivis cursus_suivis2 =  serviceCursus_Suivis.FindCursus_Suivis(cursus_suivis);
+					Cursus cu = new Cursus();
+				//	cu.setId(idCursus)
+					Cursus c = new Cursus();
+					c.setId(idCursus);
+					
+					System.out.println("cours* = "+cursus_suivis2.getId_Cours());
+					/*c.setId(cursus_suivis2.getId_Cours());
+					System.out.println("cours id = "+cursus_suivis2.getId_Cours());
+					Cours coursToDisplay=serviceCours.get(c);*/
+					Cours coursToDisplay=serviceCours.FirstCoursCursus(c);
+					//cours object
 					Chapitre ch = new Chapitre();
+					
+						model.addAttribute("coursToDisplay", coursToDisplay);
 					ch.setId_Cours(coursToDisplay.getId());
 					List<Chapitre> listChapitre=serviceChapitre.AllChapitreActifCours(ch);
 					model.addAttribute("listChapitre", listChapitre);//listChapitre object
-					Chapitre chapitreToDisplay=serviceChapitre.get(ch);
+					Chapitre chapitreToDisplay=serviceChapitre.FirstChapitreCours(coursToDisplay);
+				
 					model.addAttribute("chapitreToDisplay", chapitreToDisplay);//chapitreToDisplay object
 					Section section = new Section();
 					section.setId_Chapitre(chapitreToDisplay.getId());
 					List<Section>listSection = serviceSection.AllSectionActiveChapitre(section);
 					model.addAttribute("listSection", listSection);//listSection object
-					
 					
 					return "commencerCursusEtudiant";		
 				}
