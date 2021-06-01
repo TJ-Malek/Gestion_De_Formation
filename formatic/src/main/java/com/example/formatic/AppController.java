@@ -468,4 +468,14 @@ public class AppController {
 			serviceCursus_Suivis.save(cs);
 			return "redirect:/tousCursusActif/"+id;
 		}
+		@RequestMapping("/CursusEtudiant/{id}")
+		public String CursusEtudiant(Model model,@PathVariable(name = "id") Long id) {
+			/*Cursus cursus = new Cursus();
+			cursus.setId_Formateur(id);*/
+			List<Cursus> listCursusEtudiant = serviceCursus.AllCursusActif();
+			model.addAttribute("listCursusEtudiant", listCursusEtudiant);
+			
+			return "CursusEtudiant";		
+		}
+		
 }
