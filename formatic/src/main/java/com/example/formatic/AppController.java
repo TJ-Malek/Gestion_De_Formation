@@ -567,4 +567,41 @@ public class AppController {
 					}
 					return "commencerCursusEtudiant";		
 				}
+				
+				
+				// progression cursus etudiant
+				@RequestMapping("/progressionCursusEtudiant/{id}/{idCursus}")
+				public String progressionCursusEtudiant(Model model,@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus) {
+					Cursus_Suivis cursus_suivis = new Cursus_Suivis();
+					cursus_suivis.setId_Cursus(idCursus);
+					cursus_suivis.setId_Utilisateur(id);
+					
+					Cursus_Suivis cursus_suivis2 =  serviceCursus_Suivis.FindCursus_Suivis(cursus_suivis);
+					Cours cs=new Cours();
+					Chapitre ch = new Chapitre();
+					
+					if(cursus_suivis2.getId_Cours()!=null) {
+						if(cursus_suivis2.getId_Chapitre()!=null) {
+					ch.setId(cursus_suivis2.getId_Chapitre());
+					Chapitre chapitre = serviceChapitre.get(ch);
+					Chapitre newChapitre = serviceChapitre.ClosestChapitreCours(chapitre);//chapitre if not null
+					if(newChapitre==null) {
+					
+					cs.setId(cursus_suivis2.getId_Cours());
+					
+					Cours coursToDisplay=serviceCours.get(cs);
+					
+					Cours newCours = serviceCours.ClosestCoursCursus(coursToDisplay);
+					cursus_suivis2.setId_Cours(newCours.getId());//cours
+					Cours c = new Cours();
+					c.setId(newCours.getId());
+					newChapitre = serviceChapitre.FirstChapitreCours(c);//chapitre if null
+					
+					}
+					cursus_suivis2.setId_Chapitre(newChapitre.getId());
+						}
+						serviceCursus_Suivis.save(cursus_suivis2);
+					}
+					return "redirect:/commencerCursusEtudiant/"+id+"/"+idCursus;		
+				}
 }

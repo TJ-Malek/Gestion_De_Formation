@@ -20,4 +20,6 @@ public interface ChapitreRepository extends JpaRepository<Chapitre, Long>  {
 	public List<Chapitre> AllChapitreActifCours(Long id_Cours);
 	@Query("select c from Chapitre c where c.id_Cours = ?1 and c.etat=1 and c.date_ajout in (select MIN(c.date_ajout) from c)")
 	public Chapitre FirstChapitreCours(Long id_Cours);
+	@Query(nativeQuery = true,value="select c from Chapitre c where c.id_Cours = ?1 and c.etat=1 and c.date_ajout > ?2 order by c.date_ajout ASC LIMIT 1")
+	public Chapitre ClosestChapitreCours(Long id_Cours,String date_ajout);
 }

@@ -93,4 +93,10 @@ public class ChapitreService {
 		public void delete(Chapitre chapitre) {
 			repo.deleteById(chapitre.getId());
 		}
+		// recupere le chapitre suivant
+		
+		public Chapitre ClosestChapitreCours(Chapitre chapitre) {
+			return repo.ClosestChapitreCours(chapitre.getId_Cours(),chapitre.getDate_ajout());
+		}
+		
 }

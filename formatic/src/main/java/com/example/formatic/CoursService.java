@@ -89,4 +89,10 @@ public class CoursService {
 		public void delete(Cours cours) {
 			repo.deleteById(cours.getId());
 		}
+		// recupere le cours suivant
+		
+		public Cours ClosestCoursCursus(Cours cours) {
+			
+			return repo.ClosestCoursCursus(cours.getId_Cursus(),cours.getDate_ajout());
+		}
 }
