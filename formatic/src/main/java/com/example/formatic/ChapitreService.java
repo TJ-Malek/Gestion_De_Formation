@@ -13,6 +13,8 @@ public class ChapitreService {
 	private  ChapitreRepository repo;
 	@Autowired
 	private  Cursus_SuivisService serviceCursus_Suivis;
+	@Autowired
+	private  CoursService serviceCours;
 		// Verifie si le chapitre existe dans la BD
 	
 			public Chapitre FindChapitre(Chapitre chapitre) {
@@ -29,12 +31,19 @@ public class ChapitreService {
 		public void setEtatChapitre(Chapitre chapitre) {
 			Boolean etat = getEtatChapitre(chapitre);
 		 repo.setEtat(!etat,chapitre.getId());
-		 repo.setEtat(!etat,chapitre.getId());
+		
 		 Boolean etatActif= !etat;
+		 Chapitre ch = new Chapitre();
+		 ch.setId(chapitre.getId());
+		 Cours cours= new Cours();
+		 cours.setId(get(ch).getId_Cours());
+		 
 		 if(etatActif==true) {
-			 Chapitre ch = new Chapitre();
-			 ch.setId(chapitre.getId());
-			 serviceCursus_Suivis.updateAllCursus_SuivisChapitre(chapitre.getId(),get(ch).getId_Cours());
+			 
+			 serviceCursus_Suivis.updateAllCursus_SuivisChapitre(chapitre.getId(),serviceCours.get(cours).getId_Cursus());
+		 } else {
+			 System.out.println("etat null change");
+			 serviceCursus_Suivis.updateAllCursus_SuivisChapitre(null,serviceCours.get(cours).getId_Cursus()); 
 		 }
 		}
 		

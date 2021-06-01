@@ -54,7 +54,7 @@
   Chapitre : <h2 th:if="${chapitreToDisplay!=null}" th:text="${chapitreToDisplay.designation}"></h2>
   <div th:if="${listSection!=null}">
   <div th:each="section : ${listSection}">
-  <div th:text="${section.designation}"></div>
+  <div th:text="${section.designation}" style="display:inline;"></div> : 
   <div th:text="${section.contenu}"></div>
   </div>
   </div>

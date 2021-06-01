@@ -54,8 +54,8 @@ public class Cursus_SuivisService {
 		  repo.updateAllCursus_SuivisCours(id_Cours, id_Cursus);	
 		}
 		//update cours apre etat cours=1
-				public void updateAllCursus_SuivisChapitre(Long id_Chapitre,Long id_Cours ){	
-				  repo.updateAllCursus_SuivisChapitre(id_Chapitre, id_Cours);	
+				public void updateAllCursus_SuivisChapitre(Long id_Chapitre,Long id_Cursus ){	
+				  repo.updateAllCursus_SuivisChapitre(id_Chapitre, id_Cursus);	
 				}
 		// supprime cursus_Suivis
 		public void delete(Cursus_Suivis cursus_Suivis) {

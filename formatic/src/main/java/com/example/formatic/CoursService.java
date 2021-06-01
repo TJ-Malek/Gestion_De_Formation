@@ -31,11 +31,14 @@ public class CoursService {
 			 repo.setEtat(!etat,cours.getId());
 			 Boolean etatActif= !etat;
 			 System.out.println("etat= "+etatActif);
+			 Cours c = new Cours();
+			 c.setId(cours.getId());
+			
 			 if(etatActif==true) {
-				 Cours c = new Cours();
-				 c.setId(cours.getId());
 				
 				 serviceCursus_Suivis.updateAllCursus_SuivisCours(cours.getId(), get(c).getId_Cursus());
+			 } else {
+				 serviceCursus_Suivis.updateAllCursus_SuivisCours(null, get(c).getId_Cursus());
 			 }
 		}
 		

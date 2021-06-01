@@ -15,6 +15,6 @@ public interface Cursus_SuivisRepository extends JpaRepository<Cursus_Suivis, Lo
 	@Query("update Cursus_Suivis  cs  set cs.id_Cours=?1 where cs.id_Cursus = ?2 ")
 	public void updateAllCursus_SuivisCours(Long id_Cours,Long id_Cursus );
 	@Modifying
-	@Query("update Cursus_Suivis  cs  set cs.id_Chapitre=?1 where cs.id_Cours = ?2 ")
-	public void updateAllCursus_SuivisChapitre(Long id_Chapitre,Long id_Cours );
+	@Query("update Cursus_Suivis  cs  set cs.id_Chapitre=?1 where cs.id_Cursus = ?2 ")
+	public void updateAllCursus_SuivisChapitre(Long id_Chapitre,Long id_Cursus );
 }
