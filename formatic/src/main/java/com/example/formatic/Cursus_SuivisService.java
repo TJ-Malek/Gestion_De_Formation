@@ -49,6 +49,14 @@ public class Cursus_SuivisService {
 		    return repo.findById(cursus_Suivis.getId()).get();	
 		}
 		
+		//update cours apre etat cours=1
+		public void updateAllCursus_SuivisCours(Long id_Cours,Long id_Cursus ){	
+		  repo.updateAllCursus_SuivisCours(id_Cours, id_Cursus);	
+		}
+		//update cours apre etat cours=1
+				public void updateAllCursus_SuivisChapitre(Long id_Chapitre,Long id_Cours ){	
+				  repo.updateAllCursus_SuivisChapitre(id_Chapitre, id_Cours);	
+				}
 		// supprime cursus_Suivis
 		public void delete(Cursus_Suivis cursus_Suivis) {
 			repo.deleteById(cursus_Suivis.getId());

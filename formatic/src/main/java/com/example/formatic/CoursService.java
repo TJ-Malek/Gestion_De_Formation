@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CoursService {
 	@Autowired
 	private  CoursRepository repo;
+	@Autowired
+	private  Cursus_SuivisService serviceCursus_Suivis;
 		// Verifie si le cours existe dans la BD
 	
 			public Cours FindCours(Cours cours) {
@@ -27,6 +29,14 @@ public class CoursService {
 		public void setEtatCours(Cours cours) {
 			Boolean etat = getEtatCours(cours);
 			 repo.setEtat(!etat,cours.getId());
+			 Boolean etatActif= !etat;
+			 System.out.println("etat= "+etatActif);
+			 if(etatActif==true) {
+				 Cours c = new Cours();
+				 c.setId(cours.getId());
+				
+				 serviceCursus_Suivis.updateAllCursus_SuivisCours(cours.getId(), get(c).getId_Cursus());
+			 }
 		}
 		
 		// liste de tous les cours

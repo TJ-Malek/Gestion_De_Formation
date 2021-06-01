@@ -523,31 +523,46 @@ public class AppController {
 					cursus_suivis.setId_Utilisateur(id);
 					
 					Cursus_Suivis cursus_suivis2 =  serviceCursus_Suivis.FindCursus_Suivis(cursus_suivis);
-					Cursus cu = new Cursus();
+					//Cursus cu = new Cursus();
 				//	cu.setId(idCursus)
 					Cursus c = new Cursus();
 					c.setId(idCursus);
 					
-					System.out.println("cours* = "+cursus_suivis2.getId_Cours());
+					//System.out.println("cours* = "+cursus_suivis2.getId_Cours());
+					Cours cs=new Cours();
+					if(cursus_suivis2.getId_Cours()!=null) {
+					cs.setId(cursus_suivis2.getId_Cours());
 					/*c.setId(cursus_suivis2.getId_Cours());
 					System.out.println("cours id = "+cursus_suivis2.getId_Cours());
 					Cours coursToDisplay=serviceCours.get(c);*/
-					Cours coursToDisplay=serviceCours.FirstCoursCursus(c);
+					Cours coursToDisplay=serviceCours.get(cs);
+					model.addAttribute("coursToDisplay", coursToDisplay);//object cours
 					//cours object
 					Chapitre ch = new Chapitre();
-					
-						model.addAttribute("coursToDisplay", coursToDisplay);
+					if(cursus_suivis2.getId_Chapitre()!=null) {
+					ch.setId(cursus_suivis2.getId_Chapitre());
+						
 					ch.setId_Cours(coursToDisplay.getId());
 					List<Chapitre> listChapitre=serviceChapitre.AllChapitreActifCours(ch);
 					model.addAttribute("listChapitre", listChapitre);//listChapitre object
-					Chapitre chapitreToDisplay=serviceChapitre.FirstChapitreCours(coursToDisplay);
+					Chapitre chapitreToDisplay=serviceChapitre.get(ch);
 				
 					model.addAttribute("chapitreToDisplay", chapitreToDisplay);//chapitreToDisplay object
 					Section section = new Section();
 					section.setId_Chapitre(chapitreToDisplay.getId());
 					List<Section>listSection = serviceSection.AllSectionActiveChapitre(section);
 					model.addAttribute("listSection", listSection);//listSection object
-					
+					} else {
+						model.addAttribute("listChapitre", null);
+						model.addAttribute("chapitreToDisplay", null);
+						model.addAttribute("listSection", null);
+					}
+					}else {
+						model.addAttribute("coursToDisplay", null);
+						model.addAttribute("listChapitre", null);
+						model.addAttribute("chapitreToDisplay", null);
+						model.addAttribute("listSection", null);
+					}
 					return "commencerCursusEtudiant";		
 				}
 }

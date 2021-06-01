@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ChapitreService {
 	@Autowired
 	private  ChapitreRepository repo;
+	@Autowired
+	private  Cursus_SuivisService serviceCursus_Suivis;
 		// Verifie si le chapitre existe dans la BD
 	
 			public Chapitre FindChapitre(Chapitre chapitre) {
@@ -27,6 +29,13 @@ public class ChapitreService {
 		public void setEtatChapitre(Chapitre chapitre) {
 			Boolean etat = getEtatChapitre(chapitre);
 		 repo.setEtat(!etat,chapitre.getId());
+		 repo.setEtat(!etat,chapitre.getId());
+		 Boolean etatActif= !etat;
+		 if(etatActif==true) {
+			 Chapitre ch = new Chapitre();
+			 ch.setId(chapitre.getId());
+			 serviceCursus_Suivis.updateAllCursus_SuivisChapitre(chapitre.getId(),get(ch).getId_Cours());
+		 }
 		}
 		
 		// liste de tous les chapitre
