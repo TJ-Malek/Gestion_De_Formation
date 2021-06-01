@@ -1,6 +1,7 @@
 package com.example.formatic;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -472,10 +473,29 @@ public class AppController {
 		public String CursusEtudiant(Model model,@PathVariable(name = "id") Long id) {
 			/*Cursus cursus = new Cursus();
 			cursus.setId_Formateur(id);*/
-			List<Cursus> listCursusEtudiant = serviceCursus.AllCursusActif();
+			List<Cursus> listCursusEtudiant = new ArrayList<Cursus>();
+			
+			Cursus_Suivis cursus_suivis = new Cursus_Suivis();
+			cursus_suivis.setId_Utilisateur(id);
+			List<Cursus_Suivis> listCursusSuivis = serviceCursus_Suivis.AllCursus_SuivisCursus(cursus_suivis);
+			 for (Cursus_Suivis cs : listCursusSuivis) {
+		         Long CursusId = cs.getId_Cursus();
+		         Cursus cursus = new Cursus();
+		         cursus.setId(CursusId);
+		         listCursusEtudiant.add(serviceCursus.get(cursus));
+		      }
 			model.addAttribute("listCursusEtudiant", listCursusEtudiant);
 			
 			return "CursusEtudiant";		
+		}
+		@RequestMapping("/deleteCursusEtudiant/{id}/{idCursus}")
+		public String deleteCursusEtudiant(@PathVariable(name = "id") Long id,@PathVariable(name = "idCursus") Long idCursus) {
+			Cursus_Suivis cursus_suivis = new Cursus_Suivis();
+			cursus_suivis.setId_Cursus(idCursus);
+			cursus_suivis.setId_Utilisateur(id);
+			Cursus_Suivis cursus_suivisToDelete = serviceCursus_Suivis.FindCursus_Suivis(cursus_suivis);
+			serviceCursus_Suivis.delete(cursus_suivisToDelete);
+			return "redirect:/CursusEtudiant/"+id;
 		}
 		
 }

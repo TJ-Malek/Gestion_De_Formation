@@ -72,6 +72,31 @@
     </div>
   </div>
   <a class="btn btn-primary mr-5" th:href="@{'/commencerCursusEtudiant/' + ${id} + '/' + ${cursus.id}}" type="button">Commencer</a>
+  <!-- supprimer -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-danger col-2" data-bs-toggle="modal" th:attr="data-bs-target='#SupprimerModel'+${cursus.id}">
+   Supprimer
+</button>
+
+<!-- Modal -->
+<div class="modal fade" th:id="'SupprimerModel'+${cursus.id}" tabindex="-1" th:attr="aria-labelledby='SupprimerModel'+${cursus.id}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" th:id="'SupprimerModel'+${cursus.id}"><span style="color:#0D6EFD;">Confirmation</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <span style="color:#0D6EFD;">êtes-vous sûr de vouloir supprimer?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+         <a type="button" class="btn btn-primary" th:href="@{'/deleteCursusEtudiant/' + ${id} + '/' + ${cursus.id}}">Oui</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- supprimer -->
 </div>
 
   </div>
